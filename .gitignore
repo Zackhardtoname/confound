@@ -1,0 +1,9 @@
+
+# files by extension
+
+# other
+venv
+*.idea
+__pycache__
+*.Rproj.user
+.DS_Store
