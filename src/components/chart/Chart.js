@@ -7,19 +7,20 @@ class Chart extends React.Component {
         super(props);
         this.state = {
             options: props.options,
-            template_col: { type: 'dropdown', source: ['A','I', 'U']},
             col_properties: [
                 { type: 'text', title:'STUDY', width:300},
                 { type: 'text', title:'aOR'}
             ],
+            template_col: { type: 'dropdown', source: ['A','I', 'U']},
             min_x_y: [8, 5]
         }
+
+        for (let i = this.state.col_properties.length; i < this.state.min_x_y[0]; i++) this.state.col_properties.push(this.state.template_col);
     }
 
     componentDidMount = function() {
-        for (var i = 1; i < this.state.min_x_y[0]; i++) this.state.col_properties.push(this.state.template_col);
 
-        this.el = jexcel(ReactDOM.findDOMNode(this).children[0], {
+        this.state.table = jexcel(ReactDOM.findDOMNode(this).children[0], {
             data:[[]],
             columns: this.state.col_properties,
             minDimensions: this.state.min_x_y,
@@ -27,15 +28,19 @@ class Chart extends React.Component {
             allowComments: true,
         });
 
-
+        for (let i = this.state.col_properties.length; i < this.state.min_x_y[0]; i++)
+        {
+            this.state.table.setStyle('E1', 'background-color', 'yellow')
+            this.state.col_properties.push(this.state.template_col);
+        }
     }
 
     addRow = function() {
-        this.el.insertRow();
+        this.state.table.insertRow();
     }
 
     addCol = function() {
-        this.el.insertColumn(null, null, null, {columns: this.template_col});
+        this.state.table.insertColumn(null, null, null, {columns: this.state.template_col});
     }
 
     render() {
