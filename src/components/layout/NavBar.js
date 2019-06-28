@@ -12,6 +12,7 @@ const NavBar = ({ title, subtitle}) => {
                         <small>{subtitle}</small>
                     </h1>
                     <div id="logos">
+                        {/*todo make the logos disappear or contained for low width screens*/}
                         <img id="logo" src={logo} alt="Logo"/>
                         <img src={bu_logo} alt="BU Logo"/>
                     </div>
