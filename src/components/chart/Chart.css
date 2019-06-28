@@ -1,0 +1,5 @@
+thead span {
+    writing-mode: vertical-lr;
+    text-orientation: upright;
+    letter-spacing: -.2em;
+}

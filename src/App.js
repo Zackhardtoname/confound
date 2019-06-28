@@ -6,16 +6,13 @@ import './App.css';
 
 function App() {
     return (
-        <Chart />
-
-        // <div className="App">
-        //     <Navbar title="Confounder Matrix" subtitle="Open-access Tool for Confounder Bias Analysis in SR"/>
-        //
-        //     <main id="content" className="container">
-        //         <Panel />
-        //         <Chart />
-        //     </main>
-        // </div>
+        <div className="App">
+            <Navbar title="Confounder Matrix" subtitle="Open-access Tool for Confounder Bias Analysis in SR"/>
+            <main id="content" className="container">
+                <Panel />
+                <Chart />
+            </main>
+        </div>
     );
 }
 
