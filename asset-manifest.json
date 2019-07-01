@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/confound/static/css/main.7cbaa912.chunk.css",
+    "main.js": "/confound/static/js/main.12c325aa.chunk.js",
+    "main.js.map": "/confound/static/js/main.12c325aa.chunk.js.map",
+    "runtime~main.js": "/confound/static/js/runtime~main.9ff4f7e3.js",
+    "runtime~main.js.map": "/confound/static/js/runtime~main.9ff4f7e3.js.map",
+    "static/css/2.2d153a96.chunk.css": "/confound/static/css/2.2d153a96.chunk.css",
+    "static/js/2.df26435b.chunk.js": "/confound/static/js/2.df26435b.chunk.js",
+    "static/js/2.df26435b.chunk.js.map": "/confound/static/js/2.df26435b.chunk.js.map",
+    "index.html": "/confound/index.html",
+    "precache-manifest.8860e960a49c3fe467d63a9e83b3cdf3.js": "/confound/precache-manifest.8860e960a49c3fe467d63a9e83b3cdf3.js",
+    "service-worker.js": "/confound/service-worker.js",
+    "static/css/2.2d153a96.chunk.css.map": "/confound/static/css/2.2d153a96.chunk.css.map",
+    "static/css/main.7cbaa912.chunk.css.map": "/confound/static/css/main.7cbaa912.chunk.css.map",
+    "static/media/logo.png": "/confound/static/media/logo.1baad7ac.png"
+  }
+}
