@@ -36,7 +36,7 @@ export function unStretchBtnSetup() {
     btn.addEventListener('click', function() {
         cur_instance.updateSettings({
             stretchH: "none",
-            // do not rerun this.initialRenderer here
+            // do not rerun this.generalRenderer here
         })
     })
 }

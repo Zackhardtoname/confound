@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react';
 import './Chart.css';
 import { HotTable } from '@handsontable/react';
-import {initialRenderer} from "./ChartRenderers"
+import {generalRenderer} from "./ChartRenderers"
 import {exportBtnSetup, stretchBtnSetup, unStretchBtnSetup} from "./BtnScripts"
 import {dropDownStart} from "./Constants"
 
@@ -11,22 +11,22 @@ class Chart extends React.Component {
         this.exportBtnSetup = exportBtnSetup.bind(this)
         this.stretchBtnSetup = stretchBtnSetup.bind(this)
         this.unStretchBtnSetup = unStretchBtnSetup.bind(this)
-        this.initialRenderer = initialRenderer.bind(this)
+        this.generalRenderer = generalRenderer.bind(this)
 
         this.settings = {
             licenseKey: "non-commercial-and-evaluation",
             data: [
                 ["Study", "Forest Plot", "aOR", "location", "GDP", "Country"],
-                ["paper 1", , ".5", "A", "I", "U"],
-                ["paper 2", , ".8", "A", "N", "U"],
-                ["paper 3", , "1.1", "A", "I", "U"],
+                ["paper 1", null, ".5", "A", "I", "U"],
+                ["paper 2", null, ".8", "A", "N", "U"],
+                ["paper 3", null, "1.1", "A", "I", "U"],
             ],
             colHeaders: false,
             rowHeaders: false,
             contextMenu: true,
             stretchH: "all",
             className: "htCenter",
-            cells: this.initialRenderer,
+            cells: this.generalRenderer,
 
             afterRender: () => {
                 this.verticalHeaders()
@@ -35,8 +35,6 @@ class Chart extends React.Component {
 
         this.hotTableComponent = React.createRef()
     }
-
-
 
     verticalHeaders = () => {
         let vertical = document.querySelectorAll(".handsontable tr:first-child td")
