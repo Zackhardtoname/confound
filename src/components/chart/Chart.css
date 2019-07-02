@@ -5,4 +5,5 @@
     text-orientation: upright;
     letter-spacing: -.5em;
     padding-bottom: 5px;
+    white-space: nowrap;
 }
