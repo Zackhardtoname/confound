@@ -10,21 +10,21 @@ class Chart extends React.Component {
             licenseKey: "non-commercial-and-evaluation",
             data: [
                 ["Study", "aOR", "location", "GDP", "Country"],
-                ["Zack et. 2016", ".5", "A", "I", "U"],
-                ["Light et. 2017", ".8", "A", "N", "U"],
-                [".com et. 2018", "1.1", "A", "I", "U"],
+                ["paper 1", ".5", "A", "I", "U"],
+                ["paper 2", ".8", "A", "N", "U"],
+                ["paper 3", "1.1", "A", "I", "U"],
             ],
             colHeaders: false,
             rowHeaders: false,
             contextMenu: true,
+            wordWrap: false,
             // stretchH: "all",
             className: "htCenter",
-            cells: function(row, column) {
-                const alignOptions = "htMiddle htCenter"
+            cells: function (row, column) {
 
                 let cellMeta = {
                     renderer: (instance, td, row, col, prop, value, cellProperties) => {
-                        switch(value) {
+                        switch (value) {
                             case 'A':
                                 td.style.background = '#a9d08f';
                                 break;
@@ -37,9 +37,16 @@ class Chart extends React.Component {
                             default:
                                 Handsontable.renderers.TextRenderer.apply(this, [instance, td, row, col, prop, value, cellProperties]);
                         }
+
+                        // for study column
+                        if (col === 0 || (row == 0 && col <= 1)) {
+                            td.style.fontWeight = 'bold';
+                            td.style["white-space"] = "nowrap"
+                        }
+
                         td.innerHTML = value
                         //redundancy here due to bug (issue #5027)
-                        td.className = alignOptions
+                        td.className = "htBottom htCenter"
                         return td
                     }
                 }
@@ -55,7 +62,7 @@ class Chart extends React.Component {
                     cellMeta.colWidths = 30
                 }
 
-                cellMeta.className = alignOptions
+                cellMeta.className = "htMiddle htCenter"
 
                 return cellMeta;
             },
