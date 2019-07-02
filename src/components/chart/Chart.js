@@ -17,7 +17,7 @@ class Chart extends React.Component {
             colHeaders: false,
             rowHeaders: false,
             contextMenu: true,
-            wordWrap: false,
+            // wordWrap: false,
             // stretchH: "all",
             className: "htCenter",
             cells: function (row, column) {
