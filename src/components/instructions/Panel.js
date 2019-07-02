@@ -1,5 +1,4 @@
 import React from 'react'
-import 'bootstrap/dist/css/bootstrap.css'
 
 const Panel = () => {
     return (
@@ -11,7 +10,7 @@ const Panel = () => {
                         do this
                     </li>
                     <li>
-                        do this
+                        Any red cells indicate an error - click on the cell to see the error message
                     </li>
                 </ol>
             </div>

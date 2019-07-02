@@ -1,5 +1,8 @@
-thead span {
+@import '~handsontable/dist/handsontable.full.css';
+
+.handsontable tr:first-child span {
     writing-mode: vertical-lr;
     text-orientation: upright;
-    letter-spacing: -.2em;
+    letter-spacing: -.5em;
+    padding-bottom: 5px;
 }
