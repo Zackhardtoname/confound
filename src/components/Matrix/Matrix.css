@@ -8,7 +8,31 @@
     white-space: nowrap;
 }
 
-/*.chart {*/
+.btn {
+    border-width: 0;
+}
+
+.btn-success {
+    background-color: #a9d08f;
+}
+
+.btn-warning {
+    background-color: #ffe69a;
+}
+
+.btn-danger {
+    background-color: #f4b085;
+}
+
+#hot {
+    margin: 10px 0;
+}
+
+.htCore {
+    border-width: 3px !important
+}
+
+/*.Matrix {*/
 /*    position: relative;*/
 /*    height: 70px !important;*/
 /*    !*width: 60px !important;*!*/
@@ -17,7 +41,7 @@
 /*    !*overflow: hidden;*!*/
 /*}*/
 
-/*.chart canvas {*/
+/*.Matrix canvas {*/
 /*    max-height: 100% !important;*/
 /*    max-width: 100% !important;*/
 /*}*/

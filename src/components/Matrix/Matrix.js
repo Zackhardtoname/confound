@@ -1,11 +1,11 @@
 import React, {Fragment} from 'react';
-import './Chart.css';
+import './Matrix.css';
 import { HotTable } from '@handsontable/react';
-import {generalRenderer} from "./ChartRenderers"
+import {generalRenderer} from "./MatrixRenderers"
 import {exportBtnSetup, stretchBtnSetup, unStretchBtnSetup} from "./BtnScripts"
 import {dropDownStart} from "./Constants"
 
-class Chart extends React.Component {
+class Matrix extends React.Component {
     constructor(props) {
         super(props)
         this.exportBtnSetup = exportBtnSetup.bind(this)
@@ -53,14 +53,15 @@ class Chart extends React.Component {
     render() {
         return (
             <Fragment>
-                <button id="export-file" className="intext-btn">Download CSV</button>
-                <button id="stretch" className="intext-btn">Stretch</button>
-                <button id="unstretch" className="intext-btn">Unstretch</button>
-
+                <div className="btn-group mr-3">
+                    <button id="export-file" className="intext-btn btn btn-success">Download CSV</button>
+                    <button id="stretch" className="intext-btn btn btn-warning">Stretch</button>
+                    <button id="unstretch" className="intext-btn btn btn-danger">Unstretch</button>
+                </div>
                 <HotTable ref={this.hotTableComponent} id="hot" settings={this.settings}/>
             </Fragment>
         )
     }
 }
 
-export default Chart;
+export default Matrix;
