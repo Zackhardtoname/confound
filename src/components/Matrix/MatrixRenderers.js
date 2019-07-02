@@ -20,6 +20,7 @@ export function generalRenderer (row, column) {
     else if (column === 0) {
         cellMeta.renderer = studyNames
     } else if (column === 1 && row !== 0) {
+        // forestPlot = forestPlot.bind(this)
         cellMeta.renderer = forestPlot
         cellMeta.editor = false
     }
@@ -54,59 +55,72 @@ export function studyNames (instance, td, row, col, prop, value, cellProperties)
 }
 
 export function forestPlot (instance, td, row, col, prop, value, cellProperties) {
-        if (!td.hasChildNodes()) {
-            if (cellProperties.chart) {
-                cellProperties.chart.destroy();
-                cellProperties.chart = void 0;
-            }
-        } else if (cellProperties.chart) {
-            // cellProperties.chart.update();
-            return td;
-        }
+    console.log(cellProperties)
+    // console.log(row, col)
+    // if (!td.hasChildNodes()) {
+    //     console.log("!td.hasChildNodes()")
+    //     if (cellProperties.Matrix) {
+    //         console.log("cellProperties.Matrix")
+    //         cellProperties.Matrix.destroy();
+    //         cellProperties.Matrix = void 0;
+    //     }
+    // } else if (cellProperties.Matrix) {
+    //     console.log("cellProperties.Matrix")
+    //     cellProperties.Matrix.update();
+    //     return td;
+    // }
 
-        const rates = [.5, .5, .5]
-        console.log(row, col, rates)
-        const chartContainer = document.createElement('div');
-        chartContainer.className = 'chart';
-        // const chartCanvas = document.createElement('canvas');
-        // chartContainer.appendChild(chartCanvas);
-        td.appendChild(chartContainer);
+    if (cellProperties.chart) {
+        console.log("has chart")
+        // cellProperties.Matrix.update();
+        return td;
+    }
 
-        cellProperties.chart = Highcharts.chart(chartContainer, {
+    const chartContainer = document.createElement('div');
+    chartContainer.className = 'chart';
+    td.appendChild(chartContainer);
+
+    cellProperties.chart = Highcharts.chart(chartContainer, {
+        title: {
+            text: null
+        },
+        yAxis: {
             title: {
                 text: null
-            },
-            yAxis: {
-                title: {
-                    text: null
-                }
-            },
-            legend: {
-                enabled: false
-            },
-            credits: {
-                enabled: false
-            },
-            plotOptions: {
-                series: {
-                    label: {
-                        connectorAllowed: false
-                    },
-                    pointStart: -1
-                }
-            },
-            series: [{
-                data: [-1, 2]
-            }],
-            // responsive: {
-            //     rules: [{
-            //         condition: {
-            //             maxWidth: 100
-            //         },
-            //     }]
-            // }
+            }
+        },
+        legend: {
+            enabled: false
+        },
+        credits: {
+            enabled: false
+        },
+        plotOptions: {
+            series: {
+                label: {
+                    connectorAllowed: false
+                },
+                // pointStart: -1
+            }
+        },
 
-        });
+        chart: {
+            type: 'bar'
+        },
+        xAxis: {
+            categories: ['Africa'],
+            title: {
+                text: null
+            }
+        },
+        tooltip: {
+            valueSuffix: ' millions'
+        },
+        series: [ {
+            name: 'Year 2016',
+            data: [1216, 1001, 4436, 738, 40]
+        }]
+    });
 
     return td
 }
