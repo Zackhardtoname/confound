@@ -39,7 +39,7 @@ class Chart extends React.Component {
                         }
 
                         // for study column
-                        if (col === 0 || (row == 0 && col <= 1)) {
+                        if (col === 0 || (row === 0 && col <= 1)) {
                             td.style.fontWeight = 'bold';
                             td.style["white-space"] = "nowrap"
                         }
