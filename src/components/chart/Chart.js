@@ -1,82 +1,117 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, {Fragment} from 'react';
 import './Chart.css';
-// import jexcel from "jexcel";
+import { HotTable } from '@handsontable/react';
+import Handsontable from 'handsontable';
 
 class Chart extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            options: props.options,
-            col_properties: [
-                { type: 'text', title:'STUDY', width:300},
-                { type: 'text', title:'aOR'}
+        this.settings = {
+            licenseKey: "non-commercial-and-evaluation",
+            data: [
+                ["Study", "aOR", "location", "GDP", "Country"],
+                ["Zack et. 2016", ".5", "A", "I", "U"],
+                ["Light et. 2017", ".8", "A", "N", "U"],
+                [".com et. 2018", "1.1", "A", "I", "U"],
             ],
-            template_col: { type: 'dropdown'},
-            min_x_y: [8, 5],
-            color_dict: {
-                "A": "#a9d08f",
-                "I": "#ffe69a",
-                "U": "#f4b085",
+            colHeaders: false,
+            rowHeaders: false,
+            contextMenu: true,
+            // stretchH: "all",
+            className: "htCenter",
+            cells: function(row, column) {
+                const alignOptions = "htMiddle htCenter"
+
+                let cellMeta = {
+                    renderer: (instance, td, row, col, prop, value, cellProperties) => {
+                        switch(value) {
+                            case 'A':
+                                td.style.background = '#a9d08f';
+                                break;
+                            case "I":
+                                td.style.background = '#ffe69a';
+                                break;
+                            case "U":
+                                td.style.background = '#f4b085';
+                                break;
+                            default:
+                                Handsontable.renderers.TextRenderer.apply(this, [instance, td, row, col, prop, value, cellProperties]);
+                        }
+                        td.innerHTML = value
+                        //redundancy here due to bug (issue #5027)
+                        td.className = alignOptions
+                        return td
+                    }
+                }
+
+                //for dropdown cells
+                if (row !== 0 && column >= 2) {
+                    cellMeta.type = 'dropdown';
+                    cellMeta.source = ['A', 'U', 'I', "N"]
+                }
+
+                //for dropdown columns
+                if (column >= 2) {
+                    cellMeta.colWidths = 30
+                }
+
+                cellMeta.className = alignOptions
+
+                return cellMeta;
+            },
+            afterChange: (_) => {
+                this.verticalHeaders()
+                },
+            //todo afterCreateCol not working
+            afterCreateCol: (_) => {
+                this.verticalHeaders()
             }
         }
-        this.state.template_col.source = Object.keys(this.state.color_dict)
 
-        for (let i = this.state.col_properties.length; i < this.state.min_x_y[0]; i++) this.state.col_properties.push(this.state.template_col);
+        this.hotTableComponent = React.createRef()
     }
 
-    handler = (obj, cell, val) => {
-        // would not bother with the span
-        cell.style.backgroundColor = this.state.color_dict[cell.innerHTML]
-        console.log(cell.nodeName)
+    exportBtnSetup = () => {
+        let button1 = document.getElementById('export-file');
+        let exportPlugin1 = this.hotTableComponent.current.hotInstance.getPlugin('exportFile');
 
-        if (cell.nodeName === "td") {
-            console.log(cell)
-        }
-    };
-
-    componentDidMount = function() {
-
-        this.table = window.jexcel(ReactDOM.findDOMNode(this).children[0], {
-            data:[[]],
-            columns: this.state.col_properties,
-            minDimensions: this.state.min_x_y,
-            search:true,
-            allowComments: true,
-            onchange: this.handler,
-        });
-
-        let vertical = document.querySelectorAll("thead td")
-        vertical.forEach((item, idx) => {
-            // todo span would cause a problem with right click pop up
-            if (idx >= 3) item.innerHTML = `<span>${item.innerHTML}</span>`
+        button1.addEventListener('click', function() {
+            exportPlugin1.downloadFile('csv', {
+                bom: false,
+                columnDelimiter: ',',
+                exportHiddenColumns: true,
+                exportHiddenRows: true,
+                fileExtension: 'csv',
+                filename: 'Handsontable-CSV-file_[YYYY]-[MM]-[DD]',
+                mimeType: 'text/csv',
+                rowDelimiter: '\r\n',
+                columnHeaders: false,
+                rowHeaders: false
+            });
         })
     }
 
-    addRow = function() {
-        this.table.insertRow();
+    verticalHeaders = () => {
+        let vertical = document.querySelectorAll(".handsontable tr:first-child td")
+        vertical.forEach((item, idx) => {
+            if (idx >= 2) item.innerHTML = `<span>${item.innerHTML}</span>`
+        })
     }
 
-    addCol = function() {
-        this.table.insertColumn(null, null, null, {columns: this.state.template_col});
-    }
-
-    download = function() {
-        this.table.download()
-    }
+    componentDidMount = () => {
+        this.exportBtnSetup()
+        this.verticalHeaders()
+}
 
     render() {
         return (
-            <div>
-                <div></div><br/>
-                <input type='button' value='Add new row' onClick={() => this.addRow()}></input>
+            <Fragment>
+                <HotTable ref={this.hotTableComponent} id="hot" settings={this.settings}/>
                 <br/>
-                <input type='button' value='Add new column' onClick={() => this.addCol()}></input>
-                <br/>
-                <input type='button' value='Download Matrix' onClick={() => this.download()}></input>
-            </div>
+                <button id="export-file" className="intext-btn">Download CSV</button>
+            </Fragment>
         );
-    }
+}
 }
 
 export default Chart;
