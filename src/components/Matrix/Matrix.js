@@ -16,7 +16,7 @@ class Matrix extends React.Component {
         this.settings = {
             licenseKey: "non-commercial-and-evaluation",
             data: [
-                ["Study", "Forest Plot", "aOR", "location", "GDP", "Country"],
+                ["Study", "Forest Plot", "aOR", "Location", "GDP", "Country"],
                 ["paper 1", null, ".5", "A", "I", "U"],
                 ["paper 2", null, ".8", "A", "N", "U"],
                 ["paper 3", null, "1.1", "A", "I", "U"],
@@ -30,7 +30,7 @@ class Matrix extends React.Component {
 
             afterRender: () => {
                 this.verticalHeaders()
-            },
+            }
         }
 
         this.hotTableComponent = React.createRef()

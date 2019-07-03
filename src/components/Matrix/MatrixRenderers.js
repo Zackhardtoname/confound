@@ -1,6 +1,8 @@
 import Handsontable from "handsontable";
 import Highcharts from 'highcharts';
+import HC_more from 'highcharts/highcharts-more' //module
 import {dropDownStart} from "./Constants"
+HC_more(Highcharts)
 
 export function generalRenderer (row, column) {
     let cellMeta = {}
@@ -17,14 +19,19 @@ export function generalRenderer (row, column) {
         }
     }
     //pre-dropdown columns
-    else if (column === 0) {
-        cellMeta.renderer = studyNames
+    else if (row === 0 || column === 0) {
+        cellMeta.renderer = bolden
     } else if (column === 1 && row !== 0) {
-        // forestPlot = forestPlot.bind(this)
         cellMeta.renderer = forestPlot
         cellMeta.editor = false
     }
-    cellMeta.className = "htBottom htCenter"
+
+    if (row === 0) {
+        cellMeta.className = "htBottom htCenter"
+    }
+    else {
+        cellMeta.className = "htMiddle htCenter"
+    }
     return cellMeta
 }
 
@@ -47,47 +54,27 @@ export function highlightByVal (instance, td, row, col, prop, value, cellPropert
     return td
 }
 
-export function studyNames (instance, td, row, col, prop, value, cellProperties) {
+export function bolden (instance, td, row, col, prop, value, cellProperties) {
     td.style.fontWeight = 'bold';
-    td.style["white-space"] = "nowrap"
     Handsontable.renderers.TextRenderer.apply(this, [instance, td, row, col, prop, value, cellProperties]);
     return td
 }
 
 export function forestPlot (instance, td, row, col, prop, value, cellProperties) {
-    console.log(cellProperties)
-    // console.log(row, col)
-    // if (!td.hasChildNodes()) {
-    //     console.log("!td.hasChildNodes()")
-    //     if (cellProperties.Matrix) {
-    //         console.log("cellProperties.Matrix")
-    //         cellProperties.Matrix.destroy();
-    //         cellProperties.Matrix = void 0;
-    //     }
-    // } else if (cellProperties.Matrix) {
-    //     console.log("cellProperties.Matrix")
-    //     cellProperties.Matrix.update();
-    //     return td;
-    // }
 
-    if (cellProperties.chart) {
-        console.log("has chart")
-        // cellProperties.Matrix.update();
+    const aOr = instance.getDataAtCell(row, col + 1)
+    if (td.hasChildNodes() && cellProperties.has_chart) {
+        // cellProperties.has_chart.update();
         return td;
     }
 
     const chartContainer = document.createElement('div');
-    chartContainer.className = 'chart';
-    td.appendChild(chartContainer);
+    chartContainer.className = 'chart'
+    td.appendChild(chartContainer)
 
-    cellProperties.chart = Highcharts.chart(chartContainer, {
+    cellProperties.has_chart = Highcharts.chart(chartContainer, {
         title: {
             text: null
-        },
-        yAxis: {
-            title: {
-                text: null
-            }
         },
         legend: {
             enabled: false
@@ -103,23 +90,48 @@ export function forestPlot (instance, td, row, col, prop, value, cellProperties)
                 // pointStart: -1
             }
         },
-
         chart: {
-            type: 'bar'
+            type: 'boxplot',
+            inverted: true,
+            height: 68,
+            width: 200
         },
         xAxis: {
-            categories: ['Africa'],
+            labels: {
+                enabled: false
+            },
             title: {
                 text: null
             }
         },
-        tooltip: {
-            valueSuffix: ' millions'
+
+        yAxis: {
+            title: {
+                text: null
+            },
+            plotLines: [{
+                value: aOr,
+                color: 'red',
+                width: 1,
+                label: {
+                    align: 'center',
+                    style: {
+                        color: 'gray'
+                    }
+                }
+            }],
+            // tickPixelInterval: 2
         },
-        series: [ {
-            name: 'Year 2016',
-            data: [1216, 1001, 4436, 738, 40]
+        series: [{
+            data: [
+                [760, 848, 848, 848, 965]
+                // [aOr - .2, aOr, aOr, aOr, aOr + .2],
+            ],
+            tooltip: {
+                headerFormat: '<em>Experiment No {point.key}</em><br/>'
+            }
         }]
+
     });
 
     return td
