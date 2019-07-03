@@ -63,8 +63,11 @@ export function bolden (instance, td, row, col, prop, value, cellProperties) {
 export function forestPlot (instance, td, row, col, prop, value, cellProperties) {
 
     const aOr = instance.getDataAtCell(row, col + 1)
+    let input = [aOr - .2, aOr, aOr, aOr, aOr + .2]
+    input = [760, 848, 848, 848, 965]
+
     if (td.hasChildNodes() && cellProperties.has_chart) {
-        // cellProperties.has_chart.update();
+        cellProperties.has_chart.series[0].setData(input, true);
         return td;
     }
 
@@ -81,6 +84,14 @@ export function forestPlot (instance, td, row, col, prop, value, cellProperties)
         },
         credits: {
             enabled: false
+        },
+        tooltip: {
+            formatter: function () {
+                console.log(this)
+                return `aOR: ${this.y}<br>
+                        CI: {${this.point.options.low}, ${this.point.options.high}}
+                        `
+            }
         },
         plotOptions: {
             series: {
@@ -124,14 +135,9 @@ export function forestPlot (instance, td, row, col, prop, value, cellProperties)
         },
         series: [{
             data: [
-                [760, 848, 848, 848, 965]
-                // [aOr - .2, aOr, aOr, aOr, aOr + .2],
-            ],
-            tooltip: {
-                headerFormat: '<em>Experiment No {point.key}</em><br/>'
-            }
+                input
+            ]
         }]
-
     });
 
     return td
