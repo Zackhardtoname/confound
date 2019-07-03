@@ -66,8 +66,8 @@ export function forestPlot (instance, td, row, col, prop, value, cellProperties)
     let input = [aOr - .2, aOr, aOr, aOr, aOr + .2]
     input = [760, 848, 848, 848, 965]
 
-    if (td.hasChildNodes() && cellProperties.has_chart) {
-        cellProperties.has_chart.series[0].setData(input, true);
+    if (td.hasChildNodes() && cellProperties.chart_instance) {
+        cellProperties.chart_instance.series[0].setData(input, true);
         return td;
     }
 
@@ -75,7 +75,7 @@ export function forestPlot (instance, td, row, col, prop, value, cellProperties)
     chartContainer.className = 'chart'
     td.appendChild(chartContainer)
 
-    cellProperties.has_chart = Highcharts.chart(chartContainer, {
+    cellProperties.chart_instance = Highcharts.chart(chartContainer, {
         title: {
             text: null
         },
