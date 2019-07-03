@@ -4,8 +4,11 @@
     writing-mode: vertical-lr;
     text-orientation: upright;
     letter-spacing: -.5em;
-    padding-bottom: 5px;
     white-space: nowrap;
+}
+
+.htBottom {
+    padding: 15px 0 !important
 }
 
 .btn {
@@ -28,20 +31,24 @@
     margin: 10px 0;
 }
 
+#hot td {
+    white-space: nowrap
+}
+
 .htCore {
     border-width: 3px !important
 }
 
-/*.Matrix {*/
-/*    position: relative;*/
-/*    height: 70px !important;*/
-/*    !*width: 60px !important;*!*/
-/*    height: 94px !important;*/
-/*    width: 192px !important;*/
-/*    !*overflow: hidden;*!*/
-/*}*/
+.chart {
+    position: relative;
+    /*height: 70px !important;*/
+    /*width: 60px !important;*/
+    /*height: 94px !important;*/
+    /*width: 192px !important;*/
+    overflow: hidden;
+}
 
-/*.Matrix canvas {*/
-/*    max-height: 100% !important;*/
-/*    max-width: 100% !important;*/
-/*}*/
+.highcharts-container  {
+    max-height: 100% !important;
+    max-width: 100% !important;
+}
