@@ -1,0 +1,59 @@
+@import '~handsontable/dist/handsontable.full.css';
+
+#hot-container {
+    overflow: hidden;
+    width: 100%;
+}
+
+.handsontable tr:first-child span {
+    writing-mode: vertical-lr;
+    text-orientation: upright;
+    letter-spacing: -.5em;
+    white-space: nowrap;
+}
+
+.htBottom {
+    padding: 15px 0 !important
+}
+
+.btn {
+    border-width: 0;
+}
+
+.btn-success {
+    background-color: #a9d08f;
+}
+
+.btn-warning {
+    background-color: #ffe69a;
+}
+
+.btn-danger {
+    background-color: #f4b085;
+}
+
+#hot {
+    margin: 10px 0;
+}
+
+#hot td {
+    white-space: nowrap
+}
+
+.htCore {
+    border-width: 3px !important
+}
+
+.chart {
+    position: relative;
+    /*height: 70px !important;*/
+    /*width: 60px !important;*/
+    /*height: 94px !important;*/
+    /*width: 192px !important;*/
+    overflow: hidden;
+}
+
+/*.highcharts-container  {*/
+/*    max-height: 100% !important;*/
+/*    max-width: 100% !important;*/
+/*}*/

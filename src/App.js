@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from "./components/layout/NavBar"
 import Panel from "./components/instructions/Panel"
-import Matrix from "./components/Matrix/Matrix"
+import Matrix from "./components/matrix/Matrix"
 import './App.css';
 
 function App() {
