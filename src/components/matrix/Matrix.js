@@ -32,6 +32,7 @@ class Matrix extends React.Component {
 
             afterRender: () => {
                 this.verticalHeaders()
+                this.makeTooltip()
             }
         }
 
@@ -48,12 +49,18 @@ class Matrix extends React.Component {
         })
     }
 
+    makeTooltip = () => {
+        window.$('[data-toggle="tooltip"]').tooltip({
+            offset: '0, 10'
+        });
+    }
+
     componentDidMount = () => {
         this.exportBtnSetup()
         this.stretchBtnSetup()
         this.unStretchBtnSetup()
         this.verticalHeaders()
-        window.$('[data-toggle="tooltip"]').tooltip();
+        this.makeTooltip()
     }
 
     render() {
