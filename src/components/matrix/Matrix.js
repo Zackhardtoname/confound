@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import './Matrix.css';
 import { HotTable } from '@handsontable/react';
 import {generalRenderer} from "./MatrixRenderers"
@@ -41,7 +41,10 @@ class Matrix extends React.Component {
     verticalHeaders = () => {
         let vertical = document.querySelectorAll(".handsontable tr:first-child td")
         vertical.forEach((item, idx) => {
-            if (idx >= dropDownStart) item.innerHTML = `<span>${item.innerHTML}</span>`
+            if (idx >= dropDownStart) {
+                const original = item.textContent
+                item.innerHTML = `<span data-toggle="tooltip" data-placement="top" title="${original}">${original}</span>`
+            }
         })
     }
 
@@ -50,6 +53,7 @@ class Matrix extends React.Component {
         this.stretchBtnSetup()
         this.unStretchBtnSetup()
         this.verticalHeaders()
+        window.$('[data-toggle="tooltip"]').tooltip();
     }
 
     render() {
