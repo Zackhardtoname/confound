@@ -21,7 +21,7 @@ class Matrix extends React.Component {
             contextMenu: true,
             width: '100%',
             height: 310,
-            // stretchH: "all",
+            stretchH: "all",
             className: "htCenter",
             trimDropdown: false,
             cells: this.generalRenderer,
@@ -63,9 +63,9 @@ class Matrix extends React.Component {
             stretchH: "all",
         })
 
-        cur_instance.updateSettings({
-            stretchH: "all",
-        })
+        // let ins = document.getElementsByClassName("highcharts-background")
+        // console.log(ins)
+        // ins.style.color = "blue"
     }
 
     render() {

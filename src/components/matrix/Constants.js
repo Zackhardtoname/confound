@@ -16,8 +16,8 @@ export const colorDict = {
 }
 
 export const initialData = [
-    ["Study", "Forest Plot", "aOR", "Location", "GDP", "Country"],
-    ["paper 1", null, ".5", "Adequate", "Inadequate", "Unclear"],
-    ["paper 2", null, ".8", "Adequate", "N/A", "Unclear"],
-    ["paper 3", null, "1.1", "Adequate", "Inadequate", "Unclear"],
+    ["Study", "aOR", "Forest Plot", "Location", "GDP", "Country"],
+    ["paper 1", ".5", null,  "Adequate", "Inadequate", "Unclear"],
+    ["paper 2", ".8", null, "Adequate", "N/A", "Unclear"],
+    ["paper 3", "1.1", null, "Adequate", "Inadequate", "Unclear"],
 ]
