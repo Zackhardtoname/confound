@@ -1,8 +1,8 @@
 export function exportBtnSetup() {
     let btn = document.getElementById('export-file');
-    let exportPlugin1 = this.hotTableComponent.current.hotInstance.getPlugin('exportFile');
-
+    const cur_instance = this.hotTableComponent.current.hotInstance
     btn.addEventListener('click', function() {
+        let exportPlugin1 = cur_instance.getPlugin('exportFile');
         exportPlugin1.downloadFile('csv', {
             bom: false,
             columnDelimiter: ',',
@@ -23,6 +23,10 @@ export function stretchBtnSetup() {
     const cur_instance = this.hotTableComponent.current.hotInstance
 
     btn.addEventListener('click', function() {
+        cur_instance.updateSettings({
+            stretchH: "all",
+        })
+
         cur_instance.updateSettings({
             stretchH: "all",
         })

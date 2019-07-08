@@ -21,7 +21,7 @@ export function generalRenderer (row, column) {
     //pre-dropdown columns
     else if (row === 0 || column === 0) {
         cellMeta.renderer = bolden
-    } else if (column === 1 && row !== 0) {
+    } else if (column === 2 && row !== 0) {
         cellMeta.renderer = forestPlot
         cellMeta.editor = false
     }
@@ -57,7 +57,7 @@ export function forestPlot (instance, td, row, col, prop, value, cellProperties)
     console.log("width:", instance.getColWidth(col))
     let allAORs = []
     let i
-    const aORCol = col + 1
+    const aORCol = col - 1
     for (i = 1; i < instance.countRows(); i++) {
         allAORs.push(parseFloat(instance.getDataAtCell(i, aORCol )))
     }
