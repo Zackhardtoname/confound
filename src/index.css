@@ -83,6 +83,22 @@ header #logos img:not(:first-child) {
     margin-left: 50px;
 }
 
+.bg-adequate {
+    background-color: #a9d08f;
+}
+
+.bg-unclear {
+    background-color: #ffe69a;
+}
+
+.bg-inadequate {
+    background-color: #f4b085;
+}
+
+.bg-invalid {
+    background-color: #ff4c42;
+}
+
 @media (min-width: 992px) and (max-width: 1200px) {
     h1 {
         font-size: 35px;
@@ -125,8 +141,7 @@ header #logos img:not(:first-child) {
 .card {
     background: #fff;
     box-shadow: 0 2px 4px 0 rgba(170, 170, 170, .80);
-    padding: 30px;
-    margin-bottom: 35px;
+    padding: 5px;
     border-radius: 2px;
 }
 

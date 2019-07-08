@@ -1,7 +1,7 @@
 import Handsontable from "handsontable";
 import Highcharts from 'highcharts';
 import HC_more from 'highcharts/highcharts-more' //module
-import {dropDownStart} from "./Constants"
+import {dropDownStart, colorDict} from "./Constants"
 HC_more(Highcharts)
 
 export function generalRenderer (row, column) {
@@ -37,19 +37,12 @@ export function generalRenderer (row, column) {
 
 //functions used by generalRenderer
 export function highlightByVal (instance, td, row, col, prop, value, cellProperties) {
-    switch (value) {
-        case 'A':
-            td.style.background = '#a9d08f';
-            break;
-        case "I":
-            td.style.background = '#ffe69a';
-            break;
-        case "U":
-            td.style.background = '#f4b085';
-            break;
-        default:
+    const controlDegree = colorDict[value]
+    if (controlDegree !== undefined) {
+        const color = controlDegree["color"]
+        td.style.color = color
+        td.style.background = color
     }
-
     Handsontable.renderers.TextRenderer.apply(this, [instance, td, row, col, prop, value, cellProperties]);
     return td
 }
@@ -62,7 +55,7 @@ export function bolden (instance, td, row, col, prop, value, cellProperties) {
 
 export function forestPlot (instance, td, row, col, prop, value, cellProperties) {
 
-    const aOr = instance.getDataAtCell(row, col + 1)
+    const aOr = parseInt(instance.getDataAtCell(row, col + 1))
     //todo fix scaling
     let input = [aOr - .2, aOr, aOr, aOr, aOr + .2]
     // input = [760, 848, 848, 848, 965]
