@@ -2,7 +2,7 @@
 
 #hot-container {
     overflow: hidden;
-    width: 100%;
+    /*width: 100%;*/
 }
 
 .handsontable tr:first-child span {
