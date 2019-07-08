@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from "./components/layout/NavBar"
 import Panel from "./components/instructions/Panel"
+import Legend from "./components/instructions/Legend"
 import Matrix from "./components/matrix/Matrix"
 import './App.css';
 
@@ -11,6 +12,7 @@ function App() {
             <main id="content" className="container">
                 <Panel />
                 <Matrix />
+                <Legend />
             </main>
         </div>
     );
