@@ -14,7 +14,7 @@ export function generalRenderer (row, column) {
         //dropdown cells (no header)
         if (row !== 0) {
             cellMeta.type = 'dropdown';
-            cellMeta.source = ['A', 'U', 'I', "N"]
+            cellMeta.source = ['Adequate', 'Unclear', 'Inadequate', "N/A"]
             cellMeta.renderer = highlightByVal
         }
     }
@@ -54,6 +54,7 @@ export function bolden (instance, td, row, col, prop, value, cellProperties) {
 }
 
 export function forestPlot (instance, td, row, col, prop, value, cellProperties) {
+    console.log("width:", instance.getColWidth(col))
     let allAORs = []
     let i
     const aORCol = col + 1
@@ -99,7 +100,7 @@ export function forestPlot (instance, td, row, col, prop, value, cellProperties)
             type: 'boxplot',
             inverted: true,
             height: 68,
-            width: 200
+            // width: instance.getColWidth(col)
         },
         // dont' forget xAxis and yAxis are inverted - put data in yAxis
         xAxis: {
