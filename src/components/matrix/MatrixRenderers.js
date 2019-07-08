@@ -54,22 +54,24 @@ export function bolden (instance, td, row, col, prop, value, cellProperties) {
 }
 
 export function forestPlot (instance, td, row, col, prop, value, cellProperties) {
-
-    const aOr = parseInt(instance.getDataAtCell(row, col + 1))
+    let allAORs = []
+    let i
+    const aORCol = col + 1
+    for (i = 1; i < instance.countRows(); i++) {
+        allAORs.push(parseFloat(instance.getDataAtCell(i, aORCol )))
+    }
+    const minAOr = Math.min(...allAORs) - .2
+    const maxAOr = Math.max(...allAORs) + .2
     //todo fix scaling
+    let aOr = parseFloat(instance.getDataAtCell(row, aORCol))
     let input = [aOr - .2, aOr, aOr, aOr, aOr + .2]
-    // input = [760, 848, 848, 848, 965]
-
-    if (td.hasChildNodes() && cellProperties.chart_instance) {
-        cellProperties.chart_instance.series[0].setData(input, true);
-        return td;
+    if (!td.hasChildNodes() || cellProperties.chart_instance) {
+        const chartContainer = document.createElement('div');
+        chartContainer.className = 'chart'
+        td.appendChild(chartContainer)
     }
 
-    const chartContainer = document.createElement('div');
-    chartContainer.className = 'chart'
-    td.appendChild(chartContainer)
-
-    cellProperties.chart_instance = Highcharts.chart(chartContainer, {
+    cellProperties.chart_instance = Highcharts.chart(td, {
         title: {
             text: null
         },
@@ -81,10 +83,9 @@ export function forestPlot (instance, td, row, col, prop, value, cellProperties)
         },
         tooltip: {
             formatter: function () {
-                console.log(this)
                 return `aOR: ${this.y}<br>
-                        CI: {${this.point.options.low}, ${this.point.options.high}}
-                        `
+                    CI: {${this.point.options.low}, ${this.point.options.high}}
+                    `
             }
         },
         plotOptions: {
@@ -92,7 +93,6 @@ export function forestPlot (instance, td, row, col, prop, value, cellProperties)
                 label: {
                     connectorAllowed: false
                 },
-                // pointStart: -1
             }
         },
         chart: {
@@ -101,23 +101,23 @@ export function forestPlot (instance, td, row, col, prop, value, cellProperties)
             height: 68,
             width: 200
         },
+        // dont' forget xAxis and yAxis are inverted - put data in yAxis
         xAxis: {
             labels: {
                 enabled: false
             },
             title: {
                 text: null
-            }
+            },
         },
-
         yAxis: {
             title: {
                 text: null
             },
             plotLines: [{
-                value: aOr,
+                value: 1,
                 color: 'red',
-                width: 1,
+                width: 2,
                 label: {
                     align: 'center',
                     style: {
@@ -125,7 +125,8 @@ export function forestPlot (instance, td, row, col, prop, value, cellProperties)
                     }
                 }
             }],
-            // tickPixelInterval: 2
+            min: minAOr,
+            max: maxAOr,
         },
         series: [{
             data: [
@@ -133,6 +134,5 @@ export function forestPlot (instance, td, row, col, prop, value, cellProperties)
             ]
         }]
     });
-
-    return td
+    return td;
 }
