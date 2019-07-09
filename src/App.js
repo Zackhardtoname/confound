@@ -11,7 +11,9 @@ function App() {
             <Navbar title="Confounder Matrix" subtitle="Open-access Tool for Confounder Bias Analysis in SR"/>
             <main id="content" className="container">
                 <Panel />
+                <hr/>
                 <Matrix />
+                <hr/>
                 <Legend />
             </main>
         </div>

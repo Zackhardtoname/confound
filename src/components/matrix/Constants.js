@@ -3,15 +3,15 @@ export const dropDownStart = 3
 export const colorDict = {
     Adequate: {
         shortName: "A",
-        color: '#a9d08f'
+        color: '--adequate-color'
     },
     Unclear: {
         shortName: "U",
-        color: '#ffe69a'
+        color: '--unclear-color'
     },
     Inadequate: {
         shortName: "I",
-        color: '#f4b085'
+        color: '--inadequate-color'
     }
 }
 

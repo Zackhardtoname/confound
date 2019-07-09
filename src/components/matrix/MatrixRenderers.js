@@ -39,7 +39,8 @@ export function generalRenderer (row, column) {
 export function highlightByVal (instance, td, row, col, prop, value, cellProperties) {
     const controlDegree = colorDict[value]
     if (controlDegree !== undefined) {
-        const color = controlDegree["color"]
+        const color = `var(${controlDegree["color"]})`
+        console.log(color)
         td.style.color = color
         td.style.background = color
     }
@@ -54,7 +55,7 @@ export function bolden (instance, td, row, col, prop, value, cellProperties) {
 }
 
 export function forestPlot (instance, td, row, col, prop, value, cellProperties) {
-    console.log("width:", instance.getColWidth(col))
+    // console.log("width:", instance.getColWidth(col))
     let allAORs = []
     let i
     const aORCol = col - 1

@@ -2,8 +2,8 @@ export function exportBtnSetup() {
     let btn = document.getElementById('export-file');
     const cur_instance = this.hotTableComponent.current.hotInstance
     btn.addEventListener('click', function() {
-        let exportPlugin1 = cur_instance.getPlugin('exportFile');
-        exportPlugin1.downloadFile('csv', {
+        let exportPlugin = cur_instance.getPlugin('exportFile');
+        exportPlugin.downloadFile('csv', {
             bom: false,
             columnDelimiter: ',',
             exportHiddenColumns: true,
