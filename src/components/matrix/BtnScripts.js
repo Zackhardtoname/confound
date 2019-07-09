@@ -18,32 +18,6 @@ export function exportBtnSetup() {
     })
 }
 
-export function stretchBtnSetup() {
-    let btn = document.getElementById('stretch');
-    const cur_instance = this.hotTableComponent.current.hotInstance
-
-    btn.addEventListener('click', function() {
-        cur_instance.updateSettings({
-            stretchH: "all",
-        })
-
-        cur_instance.updateSettings({
-            stretchH: "all",
-        })
-    })
-}
-
-export function unStretchBtnSetup() {
-    let btn = document.getElementById('unstretch');
-    const cur_instance = this.hotTableComponent.current.hotInstance
-
-    btn.addEventListener('click', function() {
-        cur_instance.updateSettings({
-            stretchH: "none",
-        })
-    })
-}
-
 export function importCSV(cur_instance) {
     let input = document.getElementById('dealCsv');
     input.addEventListener('change', async function(e) {
