@@ -14,6 +14,7 @@ export function generalRenderer (row, column) {
         //dropdown cells (no header)
         if (row !== 0) {
             cellMeta.type = 'dropdown';
+            // cellMeta.source = ['Adequate', 'Unclear', 'Inadequate', "N/A"]
             cellMeta.source = ['Adequate', 'Unclear', 'Inadequate', "N/A"]
             cellMeta.renderer = highlightByVal
         }
@@ -37,6 +38,8 @@ export function generalRenderer (row, column) {
 
 //functions used by generalRenderer
 export function highlightByVal (instance, td, row, col, prop, value, cellProperties) {
+    // get rid of the carriage returns
+    if (value !== null) value = value.replace(/[\n\r'"]/g, "")
     const controlDegree = colorDict[value]
     if (controlDegree !== undefined) {
         const color = `var(${controlDegree["color"]})`
@@ -54,7 +57,7 @@ export function bolden (instance, td, row, col, prop, value, cellProperties) {
 }
 
 export function forestPlot (instance, td, row, col, prop, value, cellProperties) {
-    // Zack's understanding:
+    // Zack's understanding -- no documentation:
     // instance - the handsOnTable instance
     // td - the the td element
     // cellProperties - the properties of the td element
@@ -68,27 +71,33 @@ export function forestPlot (instance, td, row, col, prop, value, cellProperties)
     const maxAOr = Math.max(...allAORs) + .2
     let aOr = parseFloat(instance.getDataAtCell(row, aORCol))
     let input = [aOr - .2, aOr, aOr, aOr, aOr + .2]
-    if (!td.hasChildNodes() || cellProperties.chart_instance) {
-        const chartContainer = document.createElement('div');
-        chartContainer.className = 'chart'
-        td.appendChild(chartContainer)
+    // if (!(td.hasChildNodes() && cellProperties.hasOwnProperty("chart_instance"))) {
+    const chartContainer = document.createElement('div');
+    chartContainer.className = 'chart'
+    td.appendChild(chartContainer)
 
-        cellProperties.chart_instance = createHCInstance(instance, td, input, minAOr, maxAOr)
-    }
+    cellProperties.chart_instance = createHCInstance(instance, td, input, minAOr, maxAOr)
+    // }
+    // console.log(cellProperties)
+    // try {
+    //     const chart = cellProperties.chart_instance
+    //     chart.series[0].remove()
+    //     chart.addSeries({
+    //         data: [
+    //             input
+    //         ]
+    //     })
+    //     chart.yAxis[0].update({
+    //         max: minAOr
+    //     });
+    //     chart.yAxis[0].update({
+    //         max: maxAOr
+    //     });
+    // }
+    // catch {
+    //     console.log("err")
+    // }
 
-    const chart = cellProperties.chart_instance
-    chart.series[0].remove()
-    chart.addSeries({
-        data: [
-            input
-        ]
-    })
-    chart.yAxis[0].update({
-        max: minAOr
-    });
-    chart.yAxis[0].update({
-        max: maxAOr
-    });
     return td;
 }
 
@@ -135,6 +144,7 @@ function createHCInstance (instance, td, input, minAOr, maxAOr) {
             title: {
                 text: null
             },
+            // endOnTick: true,
             plotLines: [{
                 value: 1,
                 color: 'red',
