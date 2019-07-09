@@ -67,8 +67,16 @@ export function forestPlot (instance, td, row, col, prop, value, cellProperties)
     for (i = 1; i < instance.countRows(); i++) {
         allAORs.push(parseFloat(instance.getDataAtCell(i, aORCol )))
     }
-    const minAOr = Math.min(...allAORs) - .2
-    const maxAOr = Math.max(...allAORs) + .2
+
+    let minAOr = Math.min(...allAORs) - .2
+    let maxAOr = Math.max(...allAORs) + .2
+
+    if (!minAOr || !maxAOr) {
+        allAORs.pop()
+        minAOr = Math.min(...allAORs) - .2
+        maxAOr = Math.max(...allAORs) + .2
+    }
+
     let aOr = parseFloat(instance.getDataAtCell(row, aORCol))
     let input = [aOr - .2, aOr, aOr, aOr, aOr + .2]
     // if (!(td.hasChildNodes() && cellProperties.hasOwnProperty("chart_instance"))) {
@@ -165,4 +173,8 @@ function createHCInstance (instance, td, input, minAOr, maxAOr) {
             ]
         }]
     });
+}
+
+function adder (accumulator, currentValue) {
+    return accumulator + currentValue
 }

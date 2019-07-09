@@ -2,15 +2,13 @@ import React from 'react';
 import './Matrix.css';
 import { HotTable } from '@handsontable/react';
 import {generalRenderer} from "./MatrixRenderers"
-import {exportBtnSetup, stretchBtnSetup, unStretchBtnSetup, importCSV} from "./BtnScripts"
+import {exportBtnSetup, importCSV} from "./BtnScripts"
 import {dropDownStart, initialData} from "./Constants"
 
 class Matrix extends React.Component {
     constructor(props) {
         super(props)
         this.exportBtnSetup = exportBtnSetup.bind(this)
-        this.stretchBtnSetup = stretchBtnSetup.bind(this)
-        this.unStretchBtnSetup = unStretchBtnSetup.bind(this)
         this.generalRenderer = generalRenderer.bind(this)
 
         this.settings = {
@@ -52,8 +50,6 @@ class Matrix extends React.Component {
 
     componentDidMount = () => {
         this.exportBtnSetup()
-        this.stretchBtnSetup()
-        this.unStretchBtnSetup()
         this.verticalHeaders()
         this.makeTooltip()
 
@@ -70,8 +66,6 @@ class Matrix extends React.Component {
             <div id="hot-container">
                 <div className="btn-group mb-3">
                     <button id="export-file" className="intext-btn btn bg-adequate">Download CSV</button>
-                    <button id="stretch" className="intext-btn btn bg-unclear">Stretch</button>
-                    <button id="unstretch" className="intext-btn btn bg-inadequate">Unstretch</button>
                     <input type="file" id="dealCsv"/>
                 </div>
                 <HotTable ref={this.hotTableComponent} id="hot" settings={this.settings}/>
