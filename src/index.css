@@ -84,19 +84,19 @@ header #logos img:not(:first-child) {
 }
 
 .bg-adequate {
-    background-color: #a9d08f;
+    background-color: var(--adequate-color);
 }
 
 .bg-unclear {
-    background-color: #ffe69a;
+    background-color: var(--unclear-color);
 }
 
 .bg-inadequate {
-    background-color: #f4b085;
+    background-color: var(--inadequate-color);
 }
 
 .bg-invalid {
-    background-color: #ff4c42;
+    background-color: var(--invalid-color);
 }
 
 @media (min-width: 992px) and (max-width: 1200px) {

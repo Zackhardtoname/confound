@@ -71,7 +71,7 @@ class Matrix extends React.Component {
     render() {
         return (
             <div id="hot-container">
-                <div className="btn-group my-3">
+                <div className="btn-group mb-3">
                     <button id="export-file" className="intext-btn btn bg-adequate">Download CSV</button>
                     <button id="stretch" className="intext-btn btn bg-unclear">Stretch</button>
                     <button id="unstretch" className="intext-btn btn bg-inadequate">Unstretch</button>

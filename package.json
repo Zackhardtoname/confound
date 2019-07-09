@@ -5,11 +5,9 @@
   "homepage": "https://hicsail.github.io/confound",
   "dependencies": {
     "@handsontable/react": "^3.0.0",
-    "chart.js": "^2.8.0",
     "handsontable": "^7.1.0",
     "highcharts": "^7.1.2",
     "react": "^16.8.6",
-    "react-chartjs-2": "^2.7.6",
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1"
   },
