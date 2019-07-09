@@ -1,6 +1,6 @@
 import Handsontable from "handsontable";
 import Highcharts from 'highcharts';
-import HC_more from 'highcharts/highcharts-more' //module
+import HC_more from 'highcharts/highcharts-more'
 import {dropDownStart, colorDict} from "./Constants"
 HC_more(Highcharts)
 
@@ -79,6 +79,9 @@ export function forestPlot (instance, td, row, col, prop, value, cellProperties)
 
     let aOr = parseFloat(instance.getDataAtCell(row, aORCol))
     let input = [aOr - .2, aOr, aOr, aOr, aOr + .2]
+
+    input = precisionControl(input)
+
     // if (!(td.hasChildNodes() && cellProperties.hasOwnProperty("chart_instance"))) {
     const chartContainer = document.createElement('div');
     chartContainer.className = 'chart'
@@ -175,6 +178,8 @@ function createHCInstance (instance, td, input, minAOr, maxAOr) {
     });
 }
 
-function adder (accumulator, currentValue) {
-    return accumulator + currentValue
+function precisionControl(input) {
+    return input.map(function(each_element){
+        return Number(each_element.toFixed(2));
+    })
 }

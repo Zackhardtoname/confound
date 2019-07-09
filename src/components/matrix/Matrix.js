@@ -65,8 +65,11 @@ class Matrix extends React.Component {
         return (
             <div id="hot-container">
                 <div className="btn-group mb-3">
-                    <button id="export-file" className="intext-btn btn bg-adequate">Download CSV</button>
-                    <input type="file" id="dealCsv"/>
+                    <button id="export-file" className="btn intext-btn bg-adequate">Download CSV</button>
+                    {/*styling with the bootstrap intext-btn class for consistency*/}
+                    <input type="file" id="dealCsv" className="btn intext-btn bg-inadequate"/>
+
+
                 </div>
                 <HotTable ref={this.hotTableComponent} id="hot" settings={this.settings}/>
             </div>
