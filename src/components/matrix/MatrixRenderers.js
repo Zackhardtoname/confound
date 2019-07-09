@@ -40,7 +40,6 @@ export function highlightByVal (instance, td, row, col, prop, value, cellPropert
     const controlDegree = colorDict[value]
     if (controlDegree !== undefined) {
         const color = `var(${controlDegree["color"]})`
-        console.log(color)
         td.style.color = color
         td.style.background = color
     }
@@ -55,7 +54,10 @@ export function bolden (instance, td, row, col, prop, value, cellProperties) {
 }
 
 export function forestPlot (instance, td, row, col, prop, value, cellProperties) {
-    // console.log("width:", instance.getColWidth(col))
+    // Zack's understanding:
+    // instance - the handsOnTable instance
+    // td - the the td element
+    // cellProperties - the properties of the td element
     let allAORs = []
     let i
     const aORCol = col - 1
@@ -64,7 +66,6 @@ export function forestPlot (instance, td, row, col, prop, value, cellProperties)
     }
     const minAOr = Math.min(...allAORs) - .2
     const maxAOr = Math.max(...allAORs) + .2
-    //todo fix scaling
     let aOr = parseFloat(instance.getDataAtCell(row, aORCol))
     let input = [aOr - .2, aOr, aOr, aOr, aOr + .2]
     if (!td.hasChildNodes() || cellProperties.chart_instance) {
@@ -101,7 +102,6 @@ export function forestPlot (instance, td, row, col, prop, value, cellProperties)
             type: 'boxplot',
             inverted: true,
             height: 68,
-            // width: instance.getColWidth(col)
         },
         // dont' forget xAxis and yAxis are inverted - put data in yAxis
         xAxis: {
