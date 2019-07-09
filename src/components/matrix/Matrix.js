@@ -2,7 +2,7 @@ import React from 'react';
 import './Matrix.css';
 import { HotTable } from '@handsontable/react';
 import {generalRenderer} from "./MatrixRenderers"
-import {exportBtnSetup, stretchBtnSetup, unStretchBtnSetup} from "./BtnScripts"
+import {exportBtnSetup, stretchBtnSetup, unStretchBtnSetup, importCSV} from "./BtnScripts"
 import {dropDownStart, initialData} from "./Constants"
 
 class Matrix extends React.Component {
@@ -31,7 +31,6 @@ class Matrix extends React.Component {
                 this.makeTooltip()
             }
         }
-
         this.hotTableComponent = React.createRef()
     }
 
@@ -63,9 +62,7 @@ class Matrix extends React.Component {
             stretchH: "all",
         })
 
-        // let ins = document.getElementsByClassName("highcharts-background")
-        // console.log(ins)
-        // ins.style.color = "blue"
+        importCSV(cur_instance)
     }
 
     render() {
@@ -75,6 +72,7 @@ class Matrix extends React.Component {
                     <button id="export-file" className="intext-btn btn bg-adequate">Download CSV</button>
                     <button id="stretch" className="intext-btn btn bg-unclear">Stretch</button>
                     <button id="unstretch" className="intext-btn btn bg-inadequate">Unstretch</button>
+                    <input type="file" id="dealCsv"/>
                 </div>
                 <HotTable ref={this.hotTableComponent} id="hot" settings={this.settings}/>
             </div>

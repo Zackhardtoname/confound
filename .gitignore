@@ -2,6 +2,7 @@ test.js
 bank.js
 
 # files by extension
+.csv
 
 # other
 venv
