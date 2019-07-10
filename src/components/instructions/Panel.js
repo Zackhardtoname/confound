@@ -19,6 +19,12 @@ const Panel = () => {
                         Hover over the headers of the dropdown columns to see the name in popups
                     </li>
                     <li>
+                        Right click on cells (except for the plot cells) to see the menu that allows inserting rows, columns, etc.
+                    </li>
+                    <li>
+                        Use this like an Excel. For instance, the arrow keys work in about the way way
+                    </li>
+                    <li>
                         After your changes, you can save the matrix and view it any time by uploading it
                     </li>
                 </ol>
