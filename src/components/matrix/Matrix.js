@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import './Matrix.css';
 import { HotTable } from '@handsontable/react';
 import {generalRenderer} from "./MatrixRenderers"
 import {exportBtnSetup, importCSV} from "./BtnScripts"
 import {dropDownStart, initialData} from "./Constants"
+import Legend from "./Legend"
 
 class Matrix extends React.Component {
     constructor(props) {
@@ -19,7 +20,7 @@ class Matrix extends React.Component {
             contextMenu: true,
             width: '100%',
             height: 310,
-            stretchH: "all",
+            // stretchH: "all",
             className: "htCenter",
             trimDropdown: false,
             cells: this.generalRenderer,
@@ -63,16 +64,16 @@ class Matrix extends React.Component {
 
     render() {
         return (
-            <div id="hot-container">
-                <div className="btn-group mb-3">
-                    <button id="export-file" className="btn intext-btn bg-adequate">Download CSV</button>
-                    {/*styling with the bootstrap intext-btn class for consistency*/}
-                    <input type="file" id="dealCsv" className="btn intext-btn bg-inadequate"/>
-
-
-                </div>
+            <Fragment>
                 <HotTable ref={this.hotTableComponent} id="hot" settings={this.settings}/>
-            </div>
+                <Legend />
+                <hr/>
+                <div className="btn-group mb-5">
+                    <button id="export-file" className="btn intext-btn btn-primary">Download CSV</button>
+                    {/*styling with the bootstrap intext-btn class for consistency*/}
+                    <input type="file" id="dealCsv" className="btn intext-btn btn-info"/>
+                </div>
+            </Fragment>
         )
     }
 }

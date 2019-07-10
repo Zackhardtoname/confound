@@ -69,8 +69,16 @@ header,
 
 #hot tabletable:first-of-type,
 #shadow {
-    box-shadow: 0 2px 4px 0 rgba(170, 170, 170, .80);
+    /*box-shadow: 0 0px 0px 0 rgba(170, 170, 170, .80);*/
+    /*border-width: 1px;*/
+    border-color: #cccccc;
     z-index: -1;
+}
+
+header {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #cccccc;
 }
 
 header h1,
@@ -142,11 +150,12 @@ header #logos img:not(:first-child) {
     margin-top: 270px;
 }
 
+/*#hot,*/
 .card {
-    background: #fff;
-    box-shadow: 0 2px 4px 0 rgba(170, 170, 170, .80);
-    padding: 5px;
-    border-radius: 2px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    border-color: #cccccc !important;
 }
 
 #instructions {
@@ -320,10 +329,10 @@ span.success {
 }
 
 .ss-style-multitriangles::after {
-    bottom: -25px;
+    bottom: -22px;
     z-index: 1;
     background: inherit;
-    box-shadow: -50px 50px 0 #fff, 50px -50px 0 #fff, 2px 2px 4px 0 rgba(170, 170, 170, .80), -48px 52px 4px 0 rgba(170, 170, 170, .80), 52px -48px 4px 0 rgba(170, 170, 170, .80);
+    box-shadow: -50px 50px 0 #cccccc, 50px -50px 0 #cccccc, 2px 2px 0 0 #cccccc, -48px 52px 0 0 #cccccc, 52px -48px 0 0 #cccccc;
 }
 
 /* *** */

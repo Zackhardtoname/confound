@@ -3,6 +3,7 @@ bank.js
 
 # files by extension
 .csv
+.sh
 
 # other
 venv
