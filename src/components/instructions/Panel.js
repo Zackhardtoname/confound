@@ -2,9 +2,9 @@ import React from 'react'
 
 const Panel = () => {
     return (
-        <div className="card">
+        <div id="panel" className="card">
             <div className="card-body">
-                <h5 className="card-title">Follow Me</h5>
+                <h5 className="card-title">Quick Start</h5>
                 <ol >
                     <li>
                         Edit any value via double clicks

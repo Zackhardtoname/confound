@@ -1,8 +1,8 @@
 @import '~handsontable/dist/handsontable.full.css';
 
-#hot-container {
-    overflow: hidden;
-    width: 100%;
+#hot {
+    overflow: hidden !important;
+    width: 100% !important;;
 }
 
 .handsontable tr:first-child span {
