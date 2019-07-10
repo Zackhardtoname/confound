@@ -69,8 +69,6 @@ header,
 
 #hot tabletable:first-of-type,
 #shadow {
-    /*box-shadow: 0 0px 0px 0 rgba(170, 170, 170, .80);*/
-    /*border-width: 1px;*/
     border-color: #cccccc;
     z-index: -1;
 }
