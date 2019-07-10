@@ -52,6 +52,10 @@ h1 {
     padding-left: 30px;
 }
 
+.tab {
+    margin-left: 40px;
+}
+
 header,
 #shadow {
     position: absolute;
