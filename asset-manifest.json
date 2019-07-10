@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/confound/static/css/main.5c18d195.chunk.css",
+    "main.css": "/confound/static/css/main.47e730e6.chunk.css",
     "main.js": "/confound/static/js/main.aaeea45f.chunk.js",
     "main.js.map": "/confound/static/js/main.aaeea45f.chunk.js.map",
     "runtime~main.js": "/confound/static/js/runtime~main.9ff4f7e3.js",
@@ -9,9 +9,9 @@
     "static/js/2.7d9a9c31.chunk.js": "/confound/static/js/2.7d9a9c31.chunk.js",
     "static/js/2.7d9a9c31.chunk.js.map": "/confound/static/js/2.7d9a9c31.chunk.js.map",
     "index.html": "/confound/index.html",
-    "precache-manifest.f82934703760fd37a529418d7f96bbc4.js": "/confound/precache-manifest.f82934703760fd37a529418d7f96bbc4.js",
+    "precache-manifest.fe8553426e479d3450617d0cc317fbcf.js": "/confound/precache-manifest.fe8553426e479d3450617d0cc317fbcf.js",
     "service-worker.js": "/confound/service-worker.js",
     "static/css/2.2d153a96.chunk.css.map": "/confound/static/css/2.2d153a96.chunk.css.map",
-    "static/css/main.5c18d195.chunk.css.map": "/confound/static/css/main.5c18d195.chunk.css.map"
+    "static/css/main.47e730e6.chunk.css.map": "/confound/static/css/main.47e730e6.chunk.css.map"
   }
 }
