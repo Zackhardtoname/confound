@@ -14,14 +14,13 @@ export function generalRenderer (row, column) {
         //dropdown cells (no header)
         if (row !== 0) {
             cellMeta.type = 'dropdown';
-            // cellMeta.source = ['Adequate', 'Unclear', 'Inadequate', "N/A"]
             cellMeta.source = ['Adequate', 'Unclear', 'Inadequate', "N/A"]
             cellMeta.renderer = highlightByVal
         }
     }
     //pre-dropdown columns
     else if (row === 0 || column === 0) {
-        cellMeta.renderer = bolden
+        // cellMeta.renderer = bolden
     } else if (column === 2 && row !== 0) {
         cellMeta.renderer = forestPlot
         cellMeta.editor = false
@@ -82,32 +81,32 @@ export function forestPlot (instance, td, row, col, prop, value, cellProperties)
 
     input = precisionControl(input)
 
-    // if (!(td.hasChildNodes() && cellProperties.hasOwnProperty("chart_instance"))) {
-    const chartContainer = document.createElement('div');
-    chartContainer.className = 'chart'
-    td.appendChild(chartContainer)
+    if (!(td.hasChildNodes() && cellProperties.hasOwnProperty("chart_instance"))) {
+        console.log("here", row, col)
+        console.log(td.hasChildNodes())
+        console.log(td.hasChildNodes(cellProperties.hasOwnProperty("chart_instance")))
+        console.log(input)
+        const chartContainer = document.createElement('div');
+        chartContainer.className = 'chart'
+        td.appendChild(chartContainer)
 
-    cellProperties.chart_instance = createHCInstance(instance, td, input, minAOr, maxAOr)
-    // }
-    // console.log(cellProperties)
-    // try {
-    //     const chart = cellProperties.chart_instance
-    //     chart.series[0].remove()
-    //     chart.addSeries({
-    //         data: [
-    //             input
-    //         ]
-    //     })
-    //     chart.yAxis[0].update({
-    //         max: minAOr
-    //     });
-    //     chart.yAxis[0].update({
-    //         max: maxAOr
-    //     });
-    // }
-    // catch {
-    //     console.log("err")
-    // }
+        cellProperties.chart_instance = createHCInstance(instance, td, input, minAOr, maxAOr)
+    }
+    console.log("just update", input)
+    const chart = cellProperties.chart_instance
+    console.log(chart)
+    chart.series[0].remove()
+    chart.addSeries({
+        data: [
+            input
+        ]
+    })
+    chart.yAxis[0].update({
+        max: minAOr
+    });
+    chart.yAxis[0].update({
+        max: maxAOr
+    });
 
     return td;
 }
@@ -125,8 +124,8 @@ function createHCInstance (instance, td, input, minAOr, maxAOr) {
         },
         tooltip: {
             formatter: function () {
-                return `aOR: ${this.y}<br>
-                    CI: {${this.point.options.low}, ${this.point.options.high}}
+                return `aOR: ${input[(input.length-1) / 2]}<br>
+                    CI: {${input[0]}, ${input[input.length-1]}}
                     `
             }
         },
@@ -140,7 +139,7 @@ function createHCInstance (instance, td, input, minAOr, maxAOr) {
         chart: {
             type: 'boxplot',
             inverted: true,
-            height: 68,
+            height: 168,
         },
         // dont' forget xAxis and yAxis are inverted - put data in yAxis
         xAxis: {

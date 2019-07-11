@@ -20,9 +20,8 @@ class Matrix extends React.Component {
             contextMenu: true,
             width: '100%',
             height: 310,
-            // stretchH: "all",
+            stretchH: "all",
             className: "htCenter",
-            trimDropdown: false,
             cells: this.generalRenderer,
 
             afterRender: () => {
