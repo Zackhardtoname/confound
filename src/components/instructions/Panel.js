@@ -19,6 +19,9 @@ const Panel = () => {
                         Hover over the headers of the dropdown columns to see the name in popups
                     </li>
                     <li>
+                        To empty a dropdown cell, select the cell, press space, and enter
+                    </li>
+                    <li>
                         Right click on cells (except for the plot cells) to see the menu that allows inserting rows, columns, etc.
                     </li>
                     <li>
