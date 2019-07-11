@@ -82,31 +82,28 @@ export function forestPlot (instance, td, row, col, prop, value, cellProperties)
     input = precisionControl(input)
 
     if (!(td.hasChildNodes() && cellProperties.hasOwnProperty("chart_instance"))) {
-        console.log("here", row, col)
-        console.log(td.hasChildNodes())
-        console.log(td.hasChildNodes(cellProperties.hasOwnProperty("chart_instance")))
-        console.log(input)
         const chartContainer = document.createElement('div');
         chartContainer.className = 'chart'
         td.appendChild(chartContainer)
 
-        cellProperties.chart_instance = createHCInstance(instance, td, input, minAOr, maxAOr)
+        //Commented out the bugged way to update charts without complete rerendering
+        // cellProperties.chart_instance = createHCInstance(instance, td, input, minAOr, maxAOr)
     }
-    console.log("just update", input)
-    const chart = cellProperties.chart_instance
-    console.log(chart)
-    chart.series[0].remove()
-    chart.addSeries({
-        data: [
-            input
-        ]
-    })
-    chart.yAxis[0].update({
-        max: minAOr
-    });
-    chart.yAxis[0].update({
-        max: maxAOr
-    });
+    cellProperties.chart_instance = createHCInstance(instance, td, input, minAOr, maxAOr)
+
+    // const chart = cellProperties.chart_instance
+    // chart.series[0].remove()
+    // chart.addSeries({
+    //     data: [
+    //         input
+    //     ]
+    // })
+    // chart.yAxis[0].update({
+    //     max: minAOr
+    // });
+    // chart.yAxis[0].update({
+    //     max: maxAOr
+    // });
 
     return td;
 }
@@ -139,7 +136,7 @@ function createHCInstance (instance, td, input, minAOr, maxAOr) {
         chart: {
             type: 'boxplot',
             inverted: true,
-            height: 168,
+            height: 68,
         },
         // dont' forget xAxis and yAxis are inverted - put data in yAxis
         xAxis: {
