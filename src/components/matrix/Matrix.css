@@ -5,7 +5,7 @@
     width: 100% !important;
 }
 
-.handsontable tr:first-child span {
+.handsontable tr:first-child td span {
     writing-mode: vertical-lr;
     transform: rotate(180deg);
     white-space: nowrap;
