@@ -87,23 +87,23 @@ export function forestPlot (instance, td, row, col, prop, value, cellProperties)
         td.appendChild(chartContainer)
 
         //Commented out the bugged way to update charts without complete rerendering
-        // cellProperties.chart_instance = createHCInstance(instance, td, input, minAOr, maxAOr)
+        cellProperties.chart_instance = createHCInstance(instance, td, input, minAOr, maxAOr)
     }
     cellProperties.chart_instance = createHCInstance(instance, td, input, minAOr, maxAOr)
 
-    // const chart = cellProperties.chart_instance
-    // chart.series[0].remove()
-    // chart.addSeries({
-    //     data: [
-    //         input
-    //     ]
-    // })
-    // chart.yAxis[0].update({
-    //     max: minAOr
-    // });
-    // chart.yAxis[0].update({
-    //     max: maxAOr
-    // });
+    const chart = cellProperties.chart_instance
+    chart.series[0].remove()
+    chart.addSeries({
+        data: [
+            input
+        ]
+    })
+    chart.yAxis[0].update({
+        max: minAOr
+    });
+    chart.yAxis[0].update({
+        max: maxAOr
+    });
 
     return td;
 }

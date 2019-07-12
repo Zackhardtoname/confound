@@ -15,8 +15,12 @@ class Matrix extends React.Component {
         this.settings = {
             licenseKey: "non-commercial-and-evaluation",
             data: initialData,
-            colHeaders: false,
+            colHeaders: true,
             rowHeaders: false,
+
+            columnSorting: true,
+            manualRowMove: true,
+
             contextMenu: true,
             width: '100%',
             height: 310,
@@ -27,7 +31,7 @@ class Matrix extends React.Component {
             afterRender: () => {
                 this.verticalHeaders()
                 this.makeTooltip()
-            }
+            },
         }
         this.hotTableComponent = React.createRef()
     }
@@ -54,10 +58,6 @@ class Matrix extends React.Component {
         this.makeTooltip()
 
         const cur_instance = this.hotTableComponent.current.hotInstance
-        cur_instance.updateSettings({
-            stretchH: "all",
-        })
-
         importCSV(cur_instance)
     }
 
