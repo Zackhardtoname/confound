@@ -151,7 +151,8 @@ function createHCInstance (instance, td, input, minAOr, maxAOr) {
             title: {
                 text: null
             },
-            // endOnTick: true,
+            endOnTick: true,
+            startOnTick: true,
             plotLines: [{
                 value: 1,
                 color: 'red',
