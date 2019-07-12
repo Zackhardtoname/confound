@@ -3,14 +3,20 @@ import './Matrix.css';
 import { HotTable } from '@handsontable/react';
 import {generalRenderer} from "./MatrixRenderers"
 import {exportBtnSetup, importCSV} from "./BtnScripts"
-import {dropDownStart, initialData} from "./Constants"
+import {dropDownStart, metricCol, initialData} from "./Constants"
 import Legend from "./Legend"
 
 class Matrix extends React.Component {
+
     constructor(props) {
         super(props)
+        this.hotTableComponent = React.createRef()
+        this.minMetric =  Number.POSITIVE_INFINITY
+        this.maxMetric =  Number.NEGATIVE_INFINITY
+        this.inputs =  []
         this.exportBtnSetup = exportBtnSetup.bind(this)
         this.generalRenderer = generalRenderer.bind(this)
+        this.importCSV = importCSV.bind(this)
 
         this.settings = {
             licenseKey: "non-commercial-and-evaluation",
@@ -28,12 +34,17 @@ class Matrix extends React.Component {
             className: "htCenter",
             cells: this.generalRenderer,
 
+            //reset since the bound might decrease
+            beforeRender: () => {
+                this.minMetric =  Number.POSITIVE_INFINITY
+                this.maxMetric =  Number.NEGATIVE_INFINITY
+            },
+
             afterRender: () => {
                 this.verticalHeaders()
                 this.makeTooltip()
             },
         }
-        this.hotTableComponent = React.createRef()
     }
 
     verticalHeaders = () => {
@@ -52,13 +63,16 @@ class Matrix extends React.Component {
         });
     }
 
+    getRange = (candidate) => {
+        this.minMetric = Math.min(this.minMetric, candidate)
+        this.maxMetric = Math.max(this.maxMetric, candidate)
+    }
+
     componentDidMount = () => {
         this.exportBtnSetup()
         this.verticalHeaders()
         this.makeTooltip()
-
-        const cur_instance = this.hotTableComponent.current.hotInstance
-        importCSV(cur_instance)
+        this.importCSV()
     }
 
     render() {

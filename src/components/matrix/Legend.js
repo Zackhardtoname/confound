@@ -10,7 +10,7 @@ const Legend = () => {
                 <li className="list-group-item py-2 bg-unclear">Unclear</li>
                 <li className="list-group-item py-2 bg-inadequate">Inadequate</li>
                 <li className="list-group-item py-2 ">Unknown</li>
-                <li className="list-group-item py-2 bg-invalid">Invalid Dropdown Value</li>
+                <li className="list-group-item py-2 bg-invalid">Invalid Value</li>
             </ul>
         </Fragment>
     );
