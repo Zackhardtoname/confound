@@ -1,7 +1,7 @@
 import Handsontable from "handsontable";
 import Highcharts from 'highcharts';
 import HC_more from 'highcharts/highcharts-more'
-import {dropDownStart, colorDict} from "./Constants"
+import {dropDownStart, colorDict, metricCol} from "./Constants"
 HC_more(Highcharts)
 
 export function generalRenderer (row, column) {
@@ -20,9 +20,9 @@ export function generalRenderer (row, column) {
     }
     //pre-dropdown columns
     else if (row === 0 || column === 0) {
-        // cellMeta.renderer = bolden
+        cellMeta.renderer = bolden
     } else if (column === 2 && row !== 0) {
-        cellMeta.renderer = forestPlot
+        cellMeta.renderer = forestPlot.bind(this)
         cellMeta.editor = false
     }
 
@@ -56,59 +56,36 @@ export function bolden (instance, td, row, col, prop, value, cellProperties) {
 }
 
 export function forestPlot (instance, td, row, col, prop, value, cellProperties) {
-    // Zack's understanding -- no documentation:
-    // instance - the handsOnTable instance
-    // td - the the td element
-    // cellProperties - the properties of the td element
-    let allAORs = []
-    let i
-    const aORCol = col - 1
-    for (i = 1; i < instance.countRows(); i++) {
-        allAORs.push(parseFloat(instance.getDataAtCell(i, aORCol )))
+    // parameters' purposes: https://handsontable.com/docs/7.1.0/Hooks.html#event:beforeRenderer
+    let input
+
+    // create the new range
+    if (row === 1) {
+        for (let i = 1; i < instance.countRows(); i++) {
+            input = parseInput(instance.getDataAtCell(i, metricCol))
+            this.inputs.push(input)
+            this.getRange(input[0])
+            this.getRange(input[2])
+        }
     }
 
-    let minAOr = Math.min(...allAORs) - .2
-    let maxAOr = Math.max(...allAORs) + .2
-
-    if (!minAOr || !maxAOr) {
-        allAORs.pop()
-        minAOr = Math.min(...allAORs) - .2
-        maxAOr = Math.max(...allAORs) + .2
-    }
-
-    let aOr = parseFloat(instance.getDataAtCell(row, aORCol))
-    let input = [aOr - .2, aOr, aOr, aOr, aOr + .2]
-
+    // generate input
+    input = parseInput(instance.getDataAtCell(row, metricCol))
     input = precisionControl(input)
+    const full_input = [input[0], input[1], input[1], input[1], input[2]]
 
+    // Rendering for the first time
+    // or when rendering the first plot
     if (!(td.hasChildNodes() && cellProperties.hasOwnProperty("chart_instance"))) {
         const chartContainer = document.createElement('div');
         chartContainer.className = 'chart'
         td.appendChild(chartContainer)
-
-        //Commented out the bugged way to update charts without complete rerendering
-        cellProperties.chart_instance = createHCInstance(instance, td, input, minAOr, maxAOr)
     }
-    cellProperties.chart_instance = createHCInstance(instance, td, input, minAOr, maxAOr)
-
-    const chart = cellProperties.chart_instance
-    chart.series[0].remove()
-    chart.addSeries({
-        data: [
-            input
-        ]
-    })
-    chart.yAxis[0].update({
-        max: minAOr
-    });
-    chart.yAxis[0].update({
-        max: maxAOr
-    });
-
+    cellProperties.chart_instance = createHCInstance(instance, td, full_input, this.minMetric, this.maxMetric)
     return td;
 }
 
-function createHCInstance (instance, td, input, minAOr, maxAOr) {
+function createHCInstance (instance, td, full_input, minMetric, maxMetric) {
     return Highcharts.chart(td, {
         title: {
             text: null
@@ -121,8 +98,8 @@ function createHCInstance (instance, td, input, minAOr, maxAOr) {
         },
         tooltip: {
             formatter: function () {
-                return `aOR: ${input[(input.length-1) / 2]}<br>
-                    CI: {${input[0]}, ${input[input.length-1]}}
+                return `metric: ${full_input [(full_input .length-1) / 2]}<br>
+                    CI: {${full_input [0]}, ${full_input [full_input .length-1]}}
                     `
             }
         },
@@ -164,12 +141,15 @@ function createHCInstance (instance, td, input, minAOr, maxAOr) {
                     }
                 }
             }],
-            min: minAOr,
-            max: maxAOr,
+            min: minMetric,
+            max: maxMetric,
+            resize: {
+                enabled: true
+            }
         },
         series: [{
             data: [
-                input
+                full_input
             ]
         }]
     });
@@ -179,4 +159,12 @@ function precisionControl(input) {
     return input.map(function(each_element){
         return Number(each_element.toFixed(2));
     })
+}
+
+function parseInput(input_str) {
+    const input_list = input_str.split(" ")
+    const metric = parseFloat(input_list[0])
+    const lower_bound = parseFloat(input_list[1].substring(1))
+    const higher_bound = parseFloat(input_list[2].substring(0, input_list[2].length - 1))
+    return [lower_bound, metric, higher_bound]
 }

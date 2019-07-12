@@ -18,7 +18,7 @@ export function exportBtnSetup() {
     })
 }
 
-export function importCSV(cur_instance) {
+export function importCSV() {
     let input = document.getElementById('dealCsv');
     input.addEventListener('change', async function(e) {
         let reader = new FileReader()
@@ -26,8 +26,7 @@ export function importCSV(cur_instance) {
         reader.addEventListener('load', function (e) {
 
             let csvdata = e.target.result;
-            console.log(csvdata)
-            parseCSV(cur_instance, csvdata)
+            parseCSV(this.instance, csvdata)
         });
 
         reader.readAsText(e.target.files[0]);

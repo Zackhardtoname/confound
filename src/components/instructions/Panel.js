@@ -13,7 +13,7 @@ const Panel = () => {
                         Hover over the forest plot too see the specific values in popups
                     </li>
                     <li>
-                        As of right now, please input numbers in aOR
+                        As of right now, please input numbers in metric
                     </li>
                     <li>
                         Hover over the headers of the dropdown columns to see the name in popups
