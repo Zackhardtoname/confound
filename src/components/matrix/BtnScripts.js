@@ -1,6 +1,6 @@
-export function exportBtnSetup() {
+export function exportBtnSetup(hotTableComponent) {
     let btn = document.getElementById('export-file');
-    const cur_instance = this.hotTableComponent.current.hotInstance
+    const cur_instance = hotTableComponent.current.hotInstance
     btn.addEventListener('click', function() {
         let exportPlugin = cur_instance.getPlugin('exportFile');
         exportPlugin.downloadFile('csv', {
@@ -24,7 +24,6 @@ export function importCSV() {
         let reader = new FileReader()
 
         reader.addEventListener('load', function (e) {
-
             let csvdata = e.target.result;
             parseCSV(this.instance, csvdata)
         });
