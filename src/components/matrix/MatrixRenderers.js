@@ -1,8 +1,17 @@
+import React, {useState, useContext, useEffect} from 'react';
 import Handsontable from "handsontable";
 import Highcharts from 'highcharts';
 import HC_more from 'highcharts/highcharts-more'
 import {dropDownStart, colorDict, metricCol} from "./Constants"
+import AlertContext from "../../context/alert/alertContext"
+import MatrixContext from "../../context/matrix/MatrixContext"
 HC_more(Highcharts)
+
+// const alertContext = useContext(AlertContext)
+// const {setAlert} = alertContext
+//
+// const matrixContext = useContext(MatrixContext)
+// const {inputs, getRange} = matrixContext
 
 export function generalRenderer (row, column) {
     let cellMeta = {}
@@ -63,7 +72,7 @@ export function forestPlot (instance, td, row, col, prop, value, cellProperties)
     if (row === 1) {
         for (let i = 1; i < instance.countRows(); i++) {
             input = parseInput(instance.getDataAtCell(i, metricCol))
-            this.inputs.push(input)
+            // this.inputs.push(input)
             this.getRange(input[0])
             this.getRange(input[2])
         }
