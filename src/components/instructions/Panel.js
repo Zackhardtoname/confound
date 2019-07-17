@@ -11,7 +11,7 @@ const Panel = () => {
                         Edit any value via double clicks
                     </li>
                     <li>
-                        <b>Values in the metric column must be in the format metric (upper bound, lower bound)</b>
+                        <b>Values in the metric column must be in the format metric (lower bound, upper bound)</b>
                     </li>
                     <li>
                         Clicking <i>Sort Metric </i> would sort the metric column by the metric (value in the middle)
