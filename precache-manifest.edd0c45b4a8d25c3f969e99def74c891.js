@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "5a09e40180c9bdbe4297bc35621383ed",
+    "revision": "939bdc1589153c2f0b3c8dbb5d1cf21b",
     "url": "/confound/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/confound/static/css/2.2d153a96.chunk.css"
   },
   {
-    "revision": "3f691840c1e5b5a8405f",
+    "revision": "6be0c988d20807374ea6",
     "url": "/confound/static/css/main.031972a6.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/confound/static/js/2.7ce21c8e.chunk.js"
   },
   {
-    "revision": "3f691840c1e5b5a8405f",
-    "url": "/confound/static/js/main.534f032c.chunk.js"
+    "revision": "6be0c988d20807374ea6",
+    "url": "/confound/static/js/main.c5511724.chunk.js"
   },
   {
     "revision": "1edbb15958b70baf773b",
