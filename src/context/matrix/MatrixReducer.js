@@ -1,6 +1,7 @@
 import {
-    GET_RANGE
-} from "../../types"
+    GET_RANGE,
+    RESET_RANGE
+} from "../types"
 
 export default (state, action) => {
     switch(action.type) {
@@ -9,6 +10,12 @@ export default (state, action) => {
                 ...state,
                 minMetric: Math.min(state.minMetric, action.payload),
                 maxMetric: Math.max(state.maxMetric, action.payload)
+            }
+        case RESET_RANGE:
+            return {
+                ...state,
+                minMetric: Number.POSITIVE_INFINITY,
+                maxMetric: Number.NEGATIVE_INFINITY
             }
         default:
             return state;
