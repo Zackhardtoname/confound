@@ -164,7 +164,7 @@ function parseInput(input_str, row, col, instance, alertable) {
         window.alertContext.removeAlert(`${row}_parsing`)
 
         //validator
-        if (lower_bound > higher_bound) {
+        if (lower_bound > higher_bound && study !== null) {
             window.alertContext.setAlert(`Please have the lower bound be less or equal to the upper bound for the study "${study}"`, "warning", `${row}_bound`)
         }
         else {
@@ -175,7 +175,7 @@ function parseInput(input_str, row, col, instance, alertable) {
         return [lower_bound, metric, higher_bound]
     }
     catch {
-        if (alertable) {
+        if (alertable && study !== null) {
             window.alertContext.setAlert(`Please use the correct format for the study "${study}"`, "danger", `${row}_parsing`)
         }
 
