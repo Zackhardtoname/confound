@@ -152,8 +152,11 @@ function precisionControl(input) {
     })
 }
 
-function parseInput(input_str, row, col, instance, alertable) {
-    const study = instance.getDataAtCell(row, 0)
+export function parseInput(input_str, row, col, instance, alertable) {
+    let study = null
+    if (alertable) {
+        study = instance.getDataAtCell(row, 0)
+    }
 
     try {
         const input_list = input_str.split(" ")
@@ -168,9 +171,13 @@ function parseInput(input_str, row, col, instance, alertable) {
         if (lower_bound > higher_bound && study !== null) {
             window.alertContext.setAlert(`Please have the lower bound be less or equal to the upper bound for the study "${study}"`, "warning", `${row}_bound`)
         }
+        else if ((metric > higher_bound || metric < lower_bound) && study !== null) {
+            window.alertContext.setAlert(`Please have the metric to be between the lower and the upper bounds for the study "${study}"`, "warning", `${row}_metric`)
+        }
         else {
             //not alerting about bound, remove if any
             window.alertContext.removeAlert(`${row}_bound`)
+            window.alertContext.removeAlert(`${row}_metric`)
         }
 
         return [lower_bound, metric, higher_bound]

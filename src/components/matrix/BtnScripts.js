@@ -1,3 +1,6 @@
+import {initialData as curData} from "./Constants"
+import {parseInput} from "./MatrixRenderers"
+
 export function exportBtnSetup(hotTableComponent) {
     let btn = document.getElementById('export-file');
     const cur_instance = hotTableComponent.current.hotInstance
@@ -29,6 +32,32 @@ export function importCSV() {
         });
 
         reader.readAsText(e.target.files[0]);
+    })
+}
+
+export function sortMetric() {
+    let btn = document.getElementById('sort-metric');
+
+    btn.addEventListener('click', function() {
+        curData.sort(function(x, y) {
+            const x_metric = parseInput(x[1], null, null, null, false)[1]
+            const y_metric = parseInput(y[1], null, null, null, false)[1]
+            //two loops since even if x[1] or y[1] is "metric", x_metric or y_metric could still be 1, a number
+            if (x[1] === "metric") {
+                return -1;
+            }
+            else if (y[1] === "metric") {
+                return 1;
+            }
+
+            if (x_metric < y_metric) {
+                return -1;
+            }
+            if (x_metric  > y_metric) {
+                return 1;
+            }
+            return 0;
+        });
     })
 }
 
