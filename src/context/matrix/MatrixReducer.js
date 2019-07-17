@@ -1,6 +1,7 @@
 import {
     GET_RANGE,
-    RESET_RANGE
+    RESET_RANGE,
+    Change_Metric_Name
 } from "../types"
 
 export default (state, action) => {
@@ -16,6 +17,11 @@ export default (state, action) => {
                 ...state,
                 minMetric: Number.POSITIVE_INFINITY,
                 maxMetric: Number.NEGATIVE_INFINITY
+            }
+        case Change_Metric_Name:
+            return {
+                ...state,
+                metricName: action.payload
             }
         default:
             return state;

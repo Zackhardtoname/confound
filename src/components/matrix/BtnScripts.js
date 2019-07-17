@@ -39,14 +39,15 @@ export function sortMetric() {
     let btn = document.getElementById('sort-metric');
 
     btn.addEventListener('click', function() {
+        const metricName = window.matrixContext.metricName
         curData.sort(function(x, y) {
             const x_metric = parseInput(x[1], null, null, null, false)[1]
             const y_metric = parseInput(y[1], null, null, null, false)[1]
             //two loops since even if x[1] or y[1] is "metric", x_metric or y_metric could still be 1, a number
-            if (x[1] === "metric") {
+            if (x[1] === metricName) {
                 return -1;
             }
-            else if (y[1] === "metric") {
+            else if (y[1] === metricName) {
                 return 1;
             }
 
