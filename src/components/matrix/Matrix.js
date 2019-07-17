@@ -21,7 +21,7 @@ const Matrix = () => {
 
         contextMenu: true,
         width: '100%',
-        height: 310,
+        height: 350,
         stretchH: "all",
         className: "htCenter",
         cells: generalRenderer,
