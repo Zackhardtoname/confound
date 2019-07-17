@@ -9,7 +9,7 @@ export default (state, action) => {
             // filters by message
             return [...state.filter( alert => alert.msg !== action.payload.msg), action.payload]
         case REMOVE_ALERT:
-            return state.filter(alert => alert.id !== action.payload)
+            return state.filter(alert => alert.desc_key !== action.payload)
         default:
             return state;
     }

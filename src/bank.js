@@ -3,3 +3,8 @@ for (let i = 1; i < this.state.min_x_y[0]; i++) {
 }
 
 // data: Handsontable.helper.createSpreadsheetData(200, 200),
+const makeVerticalAlign = (col, TH) => {
+    TH.className = 'align-middle'
+}
+
+// return [[...state].filter( alert => alert.msg !== action.payload.msg), action.payload]
