@@ -14,7 +14,7 @@ export function generalRenderer (row, column) {
         //dropdown cells (no header)
         if (row !== 0) {
             cellMeta.type = 'dropdown';
-            cellMeta.source = ['Adequate', 'Unclear', 'Inadequate', "N/A"]
+            cellMeta.source = ['A', 'U', 'I', "N"]
             cellMeta.renderer = highlightByVal
         }
     }
@@ -57,22 +57,12 @@ export function bolden (instance, td, row, col, prop, value, cellProperties) {
 
 export function forestPlot (instance, td, row, col, prop, value, cellProperties) {
     // parameters' purposes: https://handsontable.com/docs/7.1.0/Hooks.html#event:beforeRenderer
-    let input
-
     // create the new range
-    if (row === 1) {
-        for (let i = 1; i < instance.countRows(); i++) {
-            input = parseInput(instance.getDataAtCell(i, metricCol))
-            this.inputs.push(input)
-            this.getRange(input[0])
-            this.getRange(input[2])
-        }
-    }
-
-    // generate input
-    input = parseInput(instance.getDataAtCell(row, metricCol))
-    input = precisionControl(input)
-    const full_input = [input[0], input[1], input[1], input[1], input[2]]
+    setRange(instance, row)
+    // generate inputs
+    let inputs = parseInput(instance.getDataAtCell(row, metricCol), row, col, instance)
+    inputs = precisionControl(inputs)
+    const full_input = [inputs[0], inputs[1], inputs[1], inputs[1], inputs[2]]
 
     // Rendering for the first time
     // or when rendering the first plot
@@ -81,7 +71,7 @@ export function forestPlot (instance, td, row, col, prop, value, cellProperties)
         chartContainer.className = 'chart'
         td.appendChild(chartContainer)
     }
-    cellProperties.chart_instance = createHCInstance(instance, td, full_input, this.minMetric, this.maxMetric)
+    cellProperties.chart_instance = createHCInstance(instance, td, full_input, window.matrixContext.minMetric, window.matrixContext.maxMetric, row)
     return td;
 }
 
@@ -98,8 +88,8 @@ function createHCInstance (instance, td, full_input, minMetric, maxMetric) {
         },
         tooltip: {
             formatter: function () {
-                return `metric: ${full_input [(full_input .length-1) / 2]}<br>
-                    CI: {${full_input [0]}, ${full_input [full_input .length-1]}}
+                return `metric: ${full_input[(full_input.length-1) / 2]}<br>
+                    CI: {${full_input[0]}, ${full_input[full_input.length-1]}}
                     `
             }
         },
@@ -161,10 +151,33 @@ function precisionControl(input) {
     })
 }
 
-function parseInput(input_str) {
-    const input_list = input_str.split(" ")
-    const metric = parseFloat(input_list[0])
-    const lower_bound = parseFloat(input_list[1].substring(1))
-    const higher_bound = parseFloat(input_list[2].substring(0, input_list[2].length - 1))
-    return [lower_bound, metric, higher_bound]
+function parseInput(input_str, row, col, instance) {
+    try {
+        const input_list = input_str.split(" ")
+        const metric = parseFloat(input_list[0])
+        const lower_bound = parseFloat(input_list[1].substring(1))
+        const higher_bound = parseFloat(input_list[2].substring(0, input_list[2].length - 1))
+        return [lower_bound, metric, higher_bound]
+    }
+    catch {
+        if (row && col) {
+            const study = instance.getDataAtCell(row, 0)
+            window.alertContext.setAlert(`Please use the correct format for the study "${study}"`, "danger")
+        }
+
+        return [1, 1, 1]
+    }
+}
+
+function setRange(instance, row) {
+    let inputs
+    if (row === 1) {
+        window.matrixContext.resetRange()
+        for (let i = 1; i < instance.countRows(); i++) {
+            // set the other variables to null since those variables are only used for making alerts and all necessary alerts would be made the first time scanning all the inputs
+            inputs = parseInput(instance.getDataAtCell(i, metricCol), null, null, null)
+            window.matrixContext.getRange(inputs[0])
+            window.matrixContext.getRange(inputs[2])
+        }
+    }
 }
