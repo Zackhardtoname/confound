@@ -1,10 +1,10 @@
 import React, {Fragment, useEffect} from 'react';
-import './Matrix.css';
 import { HotTable } from '@handsontable/react';
 import {generalRenderer} from "./MatrixRenderers"
 import {exportBtnSetup, importCSV, sortMetric} from "./BtnScripts"
 import {dropDownStart, initialData} from "./Constants"
 import Legend from "./Legend"
+import './Matrix.css';
 
 const Matrix = () => {
     const hotTableComponent = React.createRef()
@@ -15,10 +15,9 @@ const Matrix = () => {
         data: initialData,
         colHeaders: true,
         rowHeaders: false,
-
         manualRowMove: true,
-
         contextMenu: true,
+
         width: '100%',
         height: 350,
         stretchH: "all",
@@ -28,8 +27,8 @@ const Matrix = () => {
             verticalHeaders()
             makeTooltip()
         },
+        //todo unable to disable due to a buggy behavior
         columnSorting: true,
-
     }
 
     const verticalHeaders = () => {

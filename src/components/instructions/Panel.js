@@ -1,4 +1,5 @@
 import React from 'react'
+import './Panel.css';
 
 const Panel = () => {
     return (
@@ -8,6 +9,12 @@ const Panel = () => {
                 <ol >
                     <li>
                         Edit any value via double clicks
+                    </li>
+                    <li>
+                        <b>Values in the metric column must be in the format metric (upper bound, lower bound)</b>
+                    </li>
+                    <li>
+                        Clicking <i>Sort Metric </i> would sort the metric column by the metric (value in the middle)
                     </li>
                     <li>
                         Hover over the forest plot too see the specific values in popups
