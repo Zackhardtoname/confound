@@ -12,12 +12,12 @@ const AlertState = props => {
 
     const [state, dispatch] = useReducer(AlertReducer, initialState)
 
-    const setAlert = (msg, style_type, timeout=5000) => {
+    const setAlert = (msg, style_type, desc_key, timeout=15000) => {
         const id = uuid.v4()
 
         dispatch({
             type: SET_ALERT,
-            payload: {msg, style_type, id},
+            payload: {msg, style_type, id, desc_key},
         })
 
         setTimeout(() =>
@@ -27,10 +27,19 @@ const AlertState = props => {
             }), timeout)
     }
 
+    const removeAlert = (desc_key) => {
+        dispatch({
+            type: REMOVE_ALERT,
+            payload: desc_key
+        })
+    }
+
+
     return (<AlertContext.Provider
         value={{
             alerts: state,
-            setAlert
+            setAlert,
+            removeAlert
         }}
     >
         {props.children}
