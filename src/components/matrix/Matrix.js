@@ -2,7 +2,7 @@ import React, {Fragment, useEffect} from 'react';
 import './Matrix.css';
 import { HotTable } from '@handsontable/react';
 import {generalRenderer} from "./MatrixRenderers"
-import {exportBtnSetup, importCSV} from "./BtnScripts"
+import {exportBtnSetup, importCSV, sortMetric} from "./BtnScripts"
 import {dropDownStart, initialData} from "./Constants"
 import Legend from "./Legend"
 
@@ -16,7 +16,6 @@ const Matrix = () => {
         colHeaders: true,
         rowHeaders: false,
 
-        columnSorting: true,
         manualRowMove: true,
 
         contextMenu: true,
@@ -29,6 +28,8 @@ const Matrix = () => {
             verticalHeaders()
             makeTooltip()
         },
+        columnSorting: true,
+
     }
 
     const verticalHeaders = () => {
@@ -49,6 +50,7 @@ const Matrix = () => {
 
     useEffect(() => {
         exportBtnSetup(hotTableComponent)
+        sortMetric()
         verticalHeaders()
         makeTooltip()
         importCSV()
@@ -61,6 +63,7 @@ const Matrix = () => {
                 <Legend />
                 <hr/>
                 <div className="btn-group mb-5">
+                    <button id="sort-metric" className="btn intext-btn btn-warning">Sort Metric</button>
                     <button id="export-file" className="btn intext-btn btn-primary">Download CSV</button>
                     {/*styling with the bootstrap intext-btn class for consistency*/}
                     <input type="file" id="dealCsv" className="btn intext-btn btn-info"/>
