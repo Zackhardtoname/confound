@@ -4,11 +4,11 @@ import HC_more from 'highcharts/highcharts-more'
 import {dropDownStart, colorDict, metricCol} from "./Constants"
 HC_more(Highcharts)
 
-export function generalRenderer (row, column) {
+export function generalRenderer (row, col) {
     let cellMeta = {}
 
     //dropdown columns
-    if (column >= dropDownStart) {
+    if (col >= dropDownStart) {
         cellMeta.colWidths = 30
 
         //dropdown cells (no header)
@@ -19,10 +19,10 @@ export function generalRenderer (row, column) {
         }
     }
     //pre-dropdown columns
-    else if (row === 0 || column === 0) {
+    else if (row === 0 || col === 0) {
         cellMeta.renderer = bolden
-    } else if (column === 2 && row !== 0) {
-        cellMeta.renderer = forestPlot.bind(this)
+    } else if (col === 2 && row !== 0) {
+        cellMeta.renderer = forestPlot
         cellMeta.editor = false
     }
 
@@ -32,6 +32,7 @@ export function generalRenderer (row, column) {
     else {
         cellMeta.className = "htMiddle htCenter"
     }
+
     return cellMeta
 }
 
