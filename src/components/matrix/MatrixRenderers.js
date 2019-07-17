@@ -20,7 +20,7 @@ export function generalRenderer (row, col) {
     }
     //pre-dropdown columns
     else if (row === 0 || col === 0) {
-        cellMeta.renderer = bolden
+        cellMeta.renderer = headers
     } else if (col === 2 && row !== 0) {
         cellMeta.renderer = forestPlot
         cellMeta.editor = false
@@ -50,9 +50,14 @@ export function highlightByVal (instance, td, row, col, prop, value, cellPropert
     return td
 }
 
-export function bolden (instance, td, row, col, prop, value, cellProperties) {
+export function headers (instance, td, row, col, prop, value, cellProperties) {
     td.style.fontWeight = 'bold';
     Handsontable.renderers.TextRenderer.apply(this, [instance, td, row, col, prop, value, cellProperties]);
+
+    if (row ===  0 && col === 1) {
+        window.matrixContext.changeMetricName(value)
+    }
+
     return td
 }
 
@@ -89,7 +94,7 @@ function createHCInstance (instance, td, full_input, minMetric, maxMetric) {
         },
         tooltip: {
             formatter: function () {
-                return `metric: ${full_input[(full_input.length-1) / 2]}<br>
+                return `${window.matrixContext.metricName}: ${full_input[(full_input.length-1) / 2]}<br>
                     CI: {${full_input[0]}, ${full_input[full_input.length-1]}}
                     `
             }

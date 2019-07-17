@@ -14,13 +14,10 @@ const Panel = () => {
                         <b>Values in the metric column must be in the format metric (lower bound, upper bound)</b>
                     </li>
                     <li>
-                        Clicking <i>Sort Metric </i> would sort the metric column by the metric (value in the middle)
+                        The <i>Sort Metric </i> bottom would sort the metric column by the metric (value in the middle)
                     </li>
                     <li>
                         Hover over the forest plot too see the specific values in popups
-                    </li>
-                    <li>
-                        As of right now, please input numbers in metric
                     </li>
                     <li>
                         Hover over the headers of the dropdown columns to see the name in popups
