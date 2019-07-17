@@ -1,15 +1,14 @@
-import React, {Fragment, useEffect, useState} from 'react';
+import React, {Fragment, useEffect} from 'react';
 import './Matrix.css';
 import { HotTable } from '@handsontable/react';
 import {generalRenderer} from "./MatrixRenderers"
 import {exportBtnSetup, importCSV} from "./BtnScripts"
-import {dropDownStart, metricCol, initialData} from "./Constants"
+import {dropDownStart, initialData} from "./Constants"
 import Legend from "./Legend"
 
 const Matrix = () => {
-    const [inputs, setinputs] = useState([])
-
     const hotTableComponent = React.createRef()
+
     const settings = {
         // refactor out some of these settings
         licenseKey: "non-commercial-and-evaluation",
@@ -26,13 +25,6 @@ const Matrix = () => {
         stretchH: "all",
         className: "htCenter",
         cells: generalRenderer,
-
-        // //reset since the bound might decrease
-        // beforeRender: () => {
-        //     setminMetric(Number.POSITIVE_INFINITY)
-        //     setmaxMetric (Number.NEGATIVE_INFINITY)
-        // },
-
         afterRender: () => {
             verticalHeaders()
             makeTooltip()
@@ -54,7 +46,6 @@ const Matrix = () => {
             offset: '0, 10'
         });
     }
-
 
     useEffect(() => {
         exportBtnSetup(hotTableComponent)

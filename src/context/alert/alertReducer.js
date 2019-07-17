@@ -6,8 +6,8 @@ import {
 export default (state, action) => {
     switch(action.type) {
         case SET_ALERT:
-            //type is discarded, now the object payload becomes entire state
-            return [...state, action.payload]
+            // filters by message
+            return [...state.filter( alert => alert.msg !== action.payload.msg), action.payload]
         case REMOVE_ALERT:
             return state.filter(alert => alert.id !== action.payload)
         default:
