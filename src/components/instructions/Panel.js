@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import './Panel.css';
 
 const Panel = () => {
@@ -6,7 +6,7 @@ const Panel = () => {
         <div id="panel" className="card">
             <div className="card-body">
                 <h5 className="card-title">Quick Start</h5>
-                <ol >
+                <ol>
                     <li>
                         Edit any value via double clicks
                     </li>
@@ -17,7 +17,8 @@ const Panel = () => {
                         To empty a dropdown cell, select the cell, press space, and enter
                     </li>
                     <li>
-                        Right click on cells (except for the plot cells) to see the menu that allows inserting rows, columns, etc.
+                        Right click on cells (except for the plot cells) to see the menu that allows inserting rows,
+                        columns, etc.
                     </li>
                 </ol>
                 <h5 className="card-title">Plots</h5>
@@ -35,7 +36,9 @@ const Panel = () => {
                         For now, you can only download the text/numbers without the plots
                     </li>
                     <li>
-                        The matrix would be saved as a TSV file. Usage instructions are <a href="https://rievent.zendesk.com/hc/en-us/articles/360000029172-FAQ-How-do-I-open-a-tsv-file-in-Excel-" target="_blank" rel="noopener noreferrer">here</a>
+                        The matrix would be saved as a TSV file. Usage instructions are <a
+                        href="https://rievent.zendesk.com/hc/en-us/articles/360000029172-FAQ-How-do-I-open-a-tsv-file-in-Excel-"
+                        target="_blank" rel="noopener noreferrer">here</a>
                     </li>
                     <li>
                         Note the Plot column must be kept empty
@@ -43,11 +46,12 @@ const Panel = () => {
                 </ol>
                 <h5 className="card-title">Questions/Contributions</h5>
                 <p className="card-text tab">
-                    Please contact BU SAIL: <a href = "mailto: shreyap@bu.edu">shreyap@bu.edu</a> and <a href = "mailto: zackL@bu.edu">zackL@bu.edu</a>
+                    Please contact BU SAIL: <a href="mailto: shreyap@bu.edu">shreyap@bu.edu</a> and <a
+                    href="mailto: zackL@bu.edu">zackL@bu.edu</a>
                 </p>
             </div>
         </div>
     );
-}
+};
 
-export default Panel
+export default Panel;

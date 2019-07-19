@@ -1,9 +1,9 @@
-import React, {Fragment} from 'react'
-import logo from "../../images/logo.png"
-import bu_logo from "../../images/bu.gif"
+import React, {Fragment} from 'react';
+import logo from "../../images/logo.png";
+import bu_logo from "../../images/bu.gif";
 import './NavBar.css';
 
-const NavBar = ({ title, subtitle}) => {
+const NavBar = ({title, subtitle}) => {
     return (
         <Fragment>
             <header>
@@ -20,6 +20,6 @@ const NavBar = ({ title, subtitle}) => {
             <div id="shadow" className="ss-style-multitriangles"></div>
         </Fragment>
     );
-}
+};
 
 export default NavBar;

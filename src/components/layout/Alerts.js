@@ -1,15 +1,15 @@
 import React, {useContext} from 'react';
-import AlertContext from "../../context/alert/alertContext"
+import AlertContext from "../../context/alert/alertContext";
 import MatrixContext from "../../context/matrix/MatrixContext";
 
 const Alerts = () => {
-    const alertContext = useContext(AlertContext)
-    window.alertContext = alertContext
-    const {alerts} = alertContext
+    const alertContext = useContext(AlertContext);
+    window.alertContext = alertContext;
+    const {alerts} = alertContext;
 
     // provides global access for HandsOnTable renderer functions
     const matrixContext = useContext(MatrixContext);
-    window.matrixContext = matrixContext
+    window.matrixContext = matrixContext;
 
     return (
         alerts.length >= 0 && (
