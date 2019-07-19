@@ -11,16 +11,7 @@ const Panel = () => {
                         Edit any value via double clicks
                     </li>
                     <li>
-                        <b>Values in the metric column must be in the format metric (lower bound, upper bound)</b>
-                    </li>
-                    <li>
-                        The <i>Sort Metric </i> bottom would sort the metric column by the metric (value in the middle)
-                    </li>
-                    <li>
-                        Hover over the forest plot too see the specific values in popups
-                    </li>
-                    <li>
-                        Hover over the headers of the dropdown columns to see the name in popups
+                        <b>Values in the metric column must be in the format: metric (lower bound, upper bound)</b>
                     </li>
                     <li>
                         To empty a dropdown cell, select the cell, press space, and enter
@@ -28,14 +19,29 @@ const Panel = () => {
                     <li>
                         Right click on cells (except for the plot cells) to see the menu that allows inserting rows, columns, etc.
                     </li>
+                </ol>
+                <h5 className="card-title">Plots</h5>
+                <ol>
                     <li>
-                        Use this like an Excel. For instance, the arrow keys work in about the way way
+                        Hover over the Plot column to see the specific values in popups
                     </li>
                     <li>
-                        After your changes, you can save the matrix and view it any time by uploading it
+                        Hover over the headers of the dropdown columns to see the name in popups
                     </li>
                 </ol>
-                <h5 className="card-title">Questions/Suggestions/Contributions</h5>
+                <h5 className="card-title">Downloading/Uploading</h5>
+                <ol>
+                    <li>
+                        For now, you can only download the text/numbers without the plots
+                    </li>
+                    <li>
+                        The matrix would be saved as a TSV file. Usage instructions are <a href="https://rievent.zendesk.com/hc/en-us/articles/360000029172-FAQ-How-do-I-open-a-tsv-file-in-Excel-" target="_blank" rel="noopener noreferrer">here</a>
+                    </li>
+                    <li>
+                        Note the Plot column must be kept empty
+                    </li>
+                </ol>
+                <h5 className="card-title">Questions/Contributions</h5>
                 <p className="card-text tab">
                     Please contact BU SAIL: <a href = "mailto: shreyap@bu.edu">shreyap@bu.edu</a> and <a href = "mailto: zackL@bu.edu">zackL@bu.edu</a>
                 </p>

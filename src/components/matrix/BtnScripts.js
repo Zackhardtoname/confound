@@ -1,4 +1,4 @@
-import {initialData as curData} from "./Constants"
+import {initialData as curData, columnDelimiter} from "./Constants"
 import {parseInput} from "./MatrixRenderers"
 
 export function exportBtnSetup(hotTableComponent) {
@@ -6,29 +6,31 @@ export function exportBtnSetup(hotTableComponent) {
     const cur_instance = hotTableComponent.current.hotInstance
     btn.addEventListener('click', function() {
         let exportPlugin = cur_instance.getPlugin('exportFile');
+        // HandsOnTable only support csv as the format parameter for now
         exportPlugin.downloadFile('csv', {
             bom: false,
-            columnDelimiter: ',',
+            columnDelimiter: columnDelimiter,
             exportHiddenColumns: true,
             exportHiddenRows: true,
-            fileExtension: 'csv',
+            fileExtension: 'tsv',
             filename: 'ConfounderMatrix-CSV-file_[YYYY]-[MM]-[DD]',
-            mimeType: 'text/csv',
-            rowDelimiter: '\r\n',
+            mimeType: 'text/tab-separated-values',
             columnHeaders: false,
-            rowHeaders: false
+            rowHeaders: false,
         })
     })
 }
 
-export function importCSV() {
+export function importCSV(hotTableComponent) {
+    const cur_instance = hotTableComponent.current.hotInstance
+
     let input = document.getElementById('dealCsv');
     input.addEventListener('change', async function(e) {
         let reader = new FileReader()
 
         reader.addEventListener('load', function (e) {
             let csvdata = e.target.result;
-            parseCSV(this.instance, csvdata)
+            parseCSV(cur_instance, csvdata)
         });
 
         reader.readAsText(e.target.files[0]);
@@ -43,7 +45,7 @@ export function sortMetric() {
         curData.sort(function(x, y) {
             const x_metric = parseInput(x[1], null, null, null, false)[1]
             const y_metric = parseInput(y[1], null, null, null, false)[1]
-            //two loops since even if x[1] or y[1] is "metric", x_metric or y_metric could still be 1, a number
+            //two loops since even if x[1] or y[1] is "Metric", x_metric or y_metric could still be 1, a number
             if (x[1] === metricName) {
                 return -1;
             }
@@ -65,11 +67,16 @@ export function sortMetric() {
 function parseCSV(cur_instance, data) {
     let parsedata = [];
     let newLinebrk = data.split("\n");
-
     for(let i = 0; i < newLinebrk.length; i++) {
-        parsedata.push(newLinebrk[i].split(","))
+        if (newLinebrk[i] !== "") {
+            let toPush = newLinebrk[i].split(columnDelimiter)
+            toPush.forEach( (str) => (
+                str.replace(/^"|"$/g, '')
+                )
+            )
+            parsedata.push(toPush)
+        }
     }
 
-    // const cur_instance = this.hotTableComponent.current.hotInstance
     cur_instance.loadData(parsedata)
 }
