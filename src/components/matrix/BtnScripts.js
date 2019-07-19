@@ -1,5 +1,5 @@
 import {initialData as curData, columnDelimiter} from "./Constants"
-import {parseInput} from "./MatrixRenderers"
+import {parseInput} from "./Helpers/InputHelpers"
 
 export function exportBtnSetup(hotTableComponent) {
     let btn = document.getElementById('export-file');
@@ -29,8 +29,8 @@ export function importCSV(hotTableComponent) {
         let reader = new FileReader()
 
         reader.addEventListener('load', function (e) {
-            let csvdata = e.target.result;
-            parseCSV(cur_instance, csvdata)
+            let csvData = e.target.result;
+            parseCSV(cur_instance, csvData)
         });
 
         reader.readAsText(e.target.files[0]);
@@ -65,18 +65,18 @@ export function sortMetric() {
 }
 
 function parseCSV(cur_instance, data) {
-    let parsedata = [];
-    let newLinebrk = data.split("\n");
-    for(let i = 0; i < newLinebrk.length; i++) {
-        if (newLinebrk[i] !== "") {
-            let toPush = newLinebrk[i].split(columnDelimiter)
+    let parseData = [];
+    let lines = data.split("\n");
+    for(let i = 0; i < lines.length; i++) {
+        if (lines[i] !== "") {
+            let toPush = lines[i].split(columnDelimiter)
             toPush.forEach( (str) => (
                 str.replace(/^"|"$/g, '')
                 )
             )
-            parsedata.push(toPush)
+            parseData.push(toPush)
         }
     }
 
-    cur_instance.loadData(parsedata)
+    cur_instance.loadData(parseData)
 }

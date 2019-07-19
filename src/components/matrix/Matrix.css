@@ -30,8 +30,3 @@
 .handsontable td.htInvalid {
     background-color: hotpink !important
 }
-
-.chart {
-    position: relative;
-    overflow: hidden;
-}
