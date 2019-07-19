@@ -1,5 +1,5 @@
-import {createContext} from "react"
+import {createContext} from "react";
 
-const matrixContext = createContext()
+const matrixContext = createContext();
 
-export default matrixContext
+export default matrixContext;

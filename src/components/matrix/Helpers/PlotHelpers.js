@@ -1,28 +1,28 @@
 import {metricCol} from "../Constants";
 import Highcharts from "highcharts";
-import { parseInput, precisionControl, setRange } from "./InputHelpers"
+import {parseInput, precisionControl, setRange} from "./InputHelpers";
 
-export function plot (instance, td, row, col, prop, value, cellProperties) {
+export function plot(instance, td, row, col, prop, value, cellProperties) {
     // parameters' purposes: https://handsontable.com/docs/7.1.0/Hooks.html#event:beforeRenderer
     // create the new range
-    setRange(instance, row)
+    setRange(instance, row);
     // generate inputs
-    let inputs = parseInput(instance.getDataAtCell(row, metricCol), row, col, instance, true)
-    inputs = precisionControl(inputs)
-    const full_input = [inputs[0], inputs[1], inputs[1], inputs[1], inputs[2]]
+    let inputs = parseInput(instance.getDataAtCell(row, metricCol), row, col, instance, true);
+    inputs = precisionControl(inputs);
+    const full_input = [inputs[0], inputs[1], inputs[1], inputs[1], inputs[2]];
 
     // Rendering for the first time
     // or when rendering the first plot
     if (!(td.hasChildNodes() && cellProperties.hasOwnProperty("chart_instance"))) {
         const chartContainer = document.createElement('div');
-        chartContainer.className = 'chart'
-        td.appendChild(chartContainer)
+        chartContainer.className = 'chart';
+        td.appendChild(chartContainer);
     }
-    cellProperties.chart_instance = createHCInstance(instance, td, full_input, window.matrixContext.minMetric, window.matrixContext.maxMetric, row)
+    cellProperties.chart_instance = createHCInstance(instance, td, full_input, window.matrixContext.minMetric, window.matrixContext.maxMetric, row);
     return td;
 }
 
-function createHCInstance (instance, td, full_input, minMetric, maxMetric) {
+function createHCInstance(instance, td, full_input, minMetric, maxMetric) {
     return Highcharts.chart(td, {
         title: {
             text: null
@@ -35,9 +35,9 @@ function createHCInstance (instance, td, full_input, minMetric, maxMetric) {
         },
         tooltip: {
             formatter: function () {
-                return `${window.matrixContext.metricName}: ${full_input[(full_input.length-1) / 2]}<br>
-                    CI: {${full_input[0]}, ${full_input[full_input.length-1]}}
-                    `
+                return `${window.matrixContext.metricName}: ${full_input[(full_input.length - 1) / 2]}<br>
+                    CI: {${full_input[0]}, ${full_input[full_input.length - 1]}}
+                    `;
             }
         },
         plotOptions: {
