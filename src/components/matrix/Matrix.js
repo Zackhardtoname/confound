@@ -49,10 +49,10 @@ const Matrix = () => {
 
     useEffect(() => {
         exportBtnSetup(hotTableComponent)
+        importCSV(hotTableComponent)
         sortMetric()
         verticalHeaders()
         makeTooltip()
-        importCSV()
         //eslint-disable-next-line
     }, [])
 
@@ -63,7 +63,7 @@ const Matrix = () => {
                 <hr/>
                 <div className="btn-group mb-5">
                     <button id="sort-metric" className="btn intext-btn btn-warning">Sort Metric</button>
-                    <button id="export-file" className="btn intext-btn btn-primary">Download CSV</button>
+                    <button id="export-file" className="btn intext-btn btn-primary">Download Data</button>
                     {/*styling with the bootstrap intext-btn class for consistency*/}
                     <input type="file" id="dealCsv" className="btn intext-btn btn-info"/>
                 </div>

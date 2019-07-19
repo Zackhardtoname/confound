@@ -12,7 +12,7 @@ const MatrixState = props =>    {
         minMetric: Number.POSITIVE_INFINITY,
         maxMetric: Number.NEGATIVE_INFINITY,
         inputs: [],
-        metricName: "metric"
+        metricName: "Metric"
     }
 
     const [state, dispatch] = useReducer(MatrixReducer, initialState)
@@ -27,7 +27,6 @@ const MatrixState = props =>    {
     }
 
     const changeMetricName = (newName) => {
-        console.log(newName)
         dispatch({type: Change_Metric_Name, payload: newName})
     }
 

@@ -22,7 +22,7 @@ export function generalRenderer (row, col) {
     else if (row === 0 || col === 0) {
         cellMeta.renderer = headers
     } else if (col === 2 && row !== 0) {
-        cellMeta.renderer = forestPlot
+        cellMeta.renderer = plot
         cellMeta.editor = false
     }
 
@@ -61,7 +61,7 @@ export function headers (instance, td, row, col, prop, value, cellProperties) {
     return td
 }
 
-export function forestPlot (instance, td, row, col, prop, value, cellProperties) {
+export function plot (instance, td, row, col, prop, value, cellProperties) {
     // parameters' purposes: https://handsontable.com/docs/7.1.0/Hooks.html#event:beforeRenderer
     // create the new range
     setRange(instance, row)
