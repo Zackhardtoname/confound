@@ -5,7 +5,6 @@ import Matrix from "./components/matrix/Matrix"
 import Alerts from "./components/layout/Alerts"
 import AlertState from "./context/alert/AlertState"
 import MatrixState from "./context/matrix/MatrixState"
-import './App.css';
 
 function App() {
     return (

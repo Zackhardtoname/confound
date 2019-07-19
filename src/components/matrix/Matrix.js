@@ -1,9 +1,10 @@
-import React, {Fragment, useEffect} from 'react';
-import { HotTable } from '@handsontable/react';
-import {generalRenderer} from "./MatrixRenderers"
-import {exportBtnSetup, importCSV, sortMetric} from "./BtnScripts"
-import {dropDownStart, initialData} from "./Constants"
+import React, { Fragment, useEffect } from 'react';
 import Legend from "./Legend"
+import { HotTable } from '@handsontable/react';
+import { generalRenderer } from "./MatrixRenderers"
+import { exportBtnSetup, importCSV, sortMetric } from "./BtnScripts"
+import { initialData } from "./Constants"
+import { verticalHeaders, makeTooltip } from "./Helpers/GeneralHelpers"
 import './Matrix.css';
 
 const Matrix = () => {
@@ -29,22 +30,6 @@ const Matrix = () => {
         },
         //todo unable to disable due to a buggy behavior
         columnSorting: true,
-    }
-
-    const verticalHeaders = () => {
-        let vertical = document.querySelectorAll(".handsontable tr:first-child td")
-        vertical.forEach((item, idx) => {
-            if (idx >= dropDownStart) {
-                const original = item.textContent
-                item.innerHTML = `<span data-toggle="tooltip" data-placement="top" title="${original}">${original}</span>`
-            }
-        })
-    }
-
-    const makeTooltip = () => {
-        window.$('[data-toggle="tooltip"]').tooltip({
-            offset: '0, 10'
-        });
     }
 
     useEffect(() => {
