@@ -4,7 +4,7 @@ import {HotTable} from '@handsontable/react';
 import {generalRenderer} from "./MatrixRenderers";
 import {exportBtnSetup, importCSV, sortMetric} from "./BtnScripts";
 import {initialData} from "./Constants";
-import {makeTooltip, verticalHeaders} from "./Helpers/GeneralHelpers";
+import {makeTooltip, verticalHeaders} from "./helpers/GeneralHelpers";
 import './Matrix.css';
 
 const Matrix = () => {

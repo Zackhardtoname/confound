@@ -1,8 +1,8 @@
 import Highcharts from 'highcharts';
 import HC_more from 'highcharts/highcharts-more';
 import {dropDownStart} from "./Constants";
-import {headers, highlightByVal} from "./Helpers/GeneralHelpers";
-import {plot} from "./Helpers/PlotHelpers";
+import {headers, highlightByVal} from "./helpers/GeneralHelpers";
+import {plot} from "./helpers/PlotHelpers";
 
 HC_more(Highcharts);
 
