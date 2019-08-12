@@ -45,20 +45,19 @@ export function sortMetric() {
         curData.sort(function (x, y) {
             const x_metric = parseInput(x[1], null, null, null, false)[1];
             const y_metric = parseInput(y[1], null, null, null, false)[1];
-            //two loops since even if x[1] or y[1] is "Metric", x_metric or y_metric could still be 1, a number
+
+            if (x_metric === y_metric) {
+                return 0
+            }
+
+            //two conditional blocks since even if x[1] or y[1] is "Metric", x_metric or y_metric could still be 1, a number
             if (x[1] === metricName) {
                 return -1;
             } else if (y[1] === metricName) {
                 return 1;
             }
 
-            if (x_metric < y_metric) {
-                return -1;
-            }
-            if (x_metric > y_metric) {
-                return 1;
-            }
-            return 0;
+            return x_metric > y_metric ? 1 : -1;
         });
     });
 }
