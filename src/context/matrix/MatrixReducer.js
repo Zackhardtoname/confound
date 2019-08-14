@@ -1,4 +1,4 @@
-import {Change_Metric_Name, GET_RANGE, RESET_RANGE} from "../types";
+import {Change_Metric_Name, GET_RANGE, RESET_RANGE, Toggle_Sorting} from "../types";
 
 export default (state, action) => {
     switch (action.type) {
@@ -18,6 +18,11 @@ export default (state, action) => {
             return {
                 ...state,
                 metricName: action.payload
+            };
+        case Toggle_Sorting:
+            return {
+                ...state,
+                isAscending: !state.isAscending
             };
         default:
             return state;

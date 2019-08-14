@@ -21,6 +21,15 @@ const Panel = () => {
                         columns, etc.
                     </li>
                 </ol>
+                <h5 className="card-title">Sorting</h5>
+                <ol>
+                    <li>
+                        Sorting uses the "metric" value (instead of the boundaries)
+                    </li>
+                    <li>
+                        The sorting button toggle between ascending and descending upon clicks (initially ascending)
+                    </li>
+                </ol>
                 <h5 className="card-title">Plots</h5>
                 <ol>
                     <li>
@@ -46,8 +55,7 @@ const Panel = () => {
                 </ol>
                 <h5 className="card-title">Questions/Contributions</h5>
                 <p className="card-text tab">
-                    Please contact BU SAIL: <a href="mailto: shreyap@bu.edu">shreyap@bu.edu</a> and <a
-                    href="mailto: zackL@bu.edu">zackL@bu.edu</a>
+                    Please contact BU SAIL: <a href="mailto: hicsail@bu.edu">hicsail@bu.edu</a>
                 </p>
             </div>
         </div>

@@ -18,6 +18,7 @@ const Matrix = () => {
         rowHeaders: false,
         manualRowMove: true,
         contextMenu: true,
+        columnSorting: true,
 
         width: '100%',
         height: 350,
@@ -28,8 +29,6 @@ const Matrix = () => {
             verticalHeaders();
             makeTooltip();
         },
-        //todo unable to disable due to a buggy behavior
-        columnSorting: true,
     };
 
     useEffect(() => {
@@ -38,6 +37,14 @@ const Matrix = () => {
         sortMetric();
         verticalHeaders();
         makeTooltip();
+
+        // have to turn the sorting functionality on for the plots to show due to issue integrating HandsOnTable with HighCharts
+        // here we turn it off immediately after the table initialization since we implement our own sorting method
+        const cur_instance = hotTableComponent.current.hotInstance
+        cur_instance.updateSettings({
+            columnSorting: false,
+        })
+
         //eslint-disable-next-line
     }, []);
 
