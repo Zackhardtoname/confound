@@ -10,7 +10,7 @@ jobs:
       - image: circleci/node:6.9.0
     working_directory: ~/repo
     environment:
-      - SOURCE_BRANCH: master
+      - SOURCE_BRANCH: deploy
       - TARGET_BRANCH: gh-pages
     steps:
       - checkout
