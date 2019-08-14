@@ -3,7 +3,7 @@ jobs:
   build:
     branches:
       only:
-        - master
+        - deploy
       ignore:
         - gh-pages
     docker:
