@@ -15,6 +15,9 @@ jobs:
       - GH_EMAIL: zack.hardtoname@gmail.com
       - GH_NAME: Zackhardtoname
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "3f:4b:98:60:89:58:99:97:4b:25:51:b6:47:76:9f:dc"
       - checkout
       - restore_cache:
           keys:
