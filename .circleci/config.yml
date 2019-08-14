@@ -7,7 +7,7 @@ jobs:
       ignore:
         - gh-pages
     docker:
-      - image: circleci/node:6.9.0
+      - image: circleci/node:7.10
     working_directory: ~/repo
     environment:
       - SOURCE_BRANCH: deploy
