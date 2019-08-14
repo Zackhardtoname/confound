@@ -12,6 +12,8 @@ jobs:
     environment:
       - SOURCE_BRANCH: deploy
       - TARGET_BRANCH: gh-pages
+      - GH_EMAIL: zack.hardtoname@gmail.com
+      - GH_NAME: Zackhardtoname
     steps:
       - checkout
       - restore_cache:
