@@ -19,9 +19,18 @@ jobs:
           fingerprints:
             - "3f:4b:98:60:89:58:99:97:4b:25:51:b6:47:76:9f:dc"
       - checkout
+      - restore_cache:
+          keys:
+          - node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          - node-v1-{{ .Branch }}-
+          - node-v1-
       - run:
           name: Install dependencies
           command: npm install
+      - save_cache:
+          paths:
+            - node_modules
+          key: node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
       - run:
           name: Run tests
           command: npm test
