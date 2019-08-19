@@ -1,11 +1,6 @@
 version: 2
 jobs:
   build:
-    branches:
-      only:
-        - deploy
-      ignore:
-        - gh-pages
     docker:
       - image: circleci/node:12.8.0
     working_directory: ~/repo
@@ -42,3 +37,14 @@ jobs:
             git config --global user.name $GH_NAME
 
             npm run deploy
+workflows:
+  version: 2
+  workflow:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - deploy
+              ignore:
+                - gh-pages
