@@ -14,14 +14,12 @@ const Matrix = () => {
         // refactor out some of these settings
         licenseKey: "non-commercial-and-evaluation",
         data: initialData,
-        colHeaders: true,
         rowHeaders: false,
         manualRowMove: true,
         contextMenu: true,
         columnSorting: true,
 
         width: '100%',
-        height: 350,
         stretchH: "all",
         className: "htCenter",
         cells: generalRenderer,

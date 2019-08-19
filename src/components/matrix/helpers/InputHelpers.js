@@ -35,7 +35,7 @@ export function parseInput(input_str, row, col, instance, alertable) {
         return [lower_bound, metric, higher_bound];
     } catch {
         if (alertable && study !== null) {
-            window.alertContext.setAlert(`Please use the correct format for the study "${study}"`, "danger", `${row}_parsing`);
+            window.alertContext.setAlert(`Please use the correct metric format for the study "${study}"`, "danger", `${row}_parsing`);
         }
 
         return [1, 1, 1];
