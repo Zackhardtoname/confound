@@ -14,7 +14,7 @@ const Matrix = () => {
         // refactor out some of these settings
         licenseKey: "non-commercial-and-evaluation",
         data: initialData,
-        rowHeaders: false,
+        rowHeaders: true,
         manualRowMove: true,
         contextMenu: true,
         columnSorting: true,
