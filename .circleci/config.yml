@@ -1,6 +1,11 @@
 version: 2
 jobs:
   build:
+    branches:
+      only:
+        - deploy
+      ignore:
+        - gh-pages
     docker:
       - image: circleci/node:12.8.0
     working_directory: ~/repo
@@ -32,19 +37,27 @@ jobs:
       - deploy:
           name: Deploy
           command: |
-            # Add credentials (Zack's)
-            git config --global user.email $GH_EMAIL
-            git config --global user.name $GH_NAME
+          # source: https://blog.frederikring.com/articles/deploying-github-pages-circle-ci/
+          # Add credentials (Zack's)
+          # double check
+          git config --global user.email $GH_EMAIL
+          git config --global user.name $GH_NAME
 
-            npm run deploy
-workflows:
-  version: 2
-  workflow:
-    jobs:
-      - build:
-          filters:
-            branches:
-              only:
-                - deploy
-              ignore:
-                - gh-pages
+          git clone $CIRCLE_REPOSITORY_URL out
+
+          cd out
+          git checkout $TARGET_BRANCH || git checkout --orphan $TARGET_BRANCH
+          git rm -rf .
+          cd ..
+
+          npm run build
+
+          cp -a build/. out/.
+
+          mkdir -p out/.circleci && cp -a .circleci/. out/.circleci/.
+          cd out
+
+          git add -A
+          git commit -m "Automated deployment to GitHub Pages: ${CIRCLE_SHA1}" --allow-empty
+
+          git push origin $TARGET_BRANCH
